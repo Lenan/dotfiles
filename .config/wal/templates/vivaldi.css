@@ -1,0 +1,7 @@
+@import url('file://home/lenan/.cache.wal/colors.css');
+
+#browser.color-behind-tabs-on .tab-position .tab.active.active {{
+	background-color:{color13};
+	color: {color0};
+}}
+

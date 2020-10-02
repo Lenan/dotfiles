@@ -1,0 +1,3 @@
+[pywal]
+bg = "#ff{color0.strip}"
+fg = "#ff{color6.strip}"
