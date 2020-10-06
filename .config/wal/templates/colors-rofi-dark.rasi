@@ -1,51 +1,53 @@
 configuration {{
-	display-drun: "Launch";
-	 	display-run: "Execute";
-	 	display-window: "Windows";
-	 	display-ssh: "SSH";
-	 	show-icons: true;
-	 	sorting-method: "fzf";
+        display-drun: "Launch";
+        display-run: "Execute";
+        display-window: "Windows";
+        display-ssh: "SSH";
+        show-icons: true;
+        sorting-method: "fzf";
 	 	sort: true;
-	 	lines: 6;
+	 	lines: 10;
 	 	matching: "glob";
 	 	drun-match-fields: "name,generic,categories";
 	 	disable-history: false;
 	 	sidebar-mode: false;
 }}
 * {{
+    width: 40%;
 	font: "NotoSans Nerd Font 14";
-    active-background: {color7};
+    active-background: {color3};
     active-foreground: @foreground;
-    normal-background: @background;
+    normal-background: @background-color;
     normal-foreground: @foreground;
-    urgent-background: {color1};
+    urgent-background: {color3};
     urgent-foreground: @foreground;
 
-    alternate-active-background: @background;
+    alternate-active-background: {color6};
     alternate-active-foreground: @foreground;
-    alternate-normal-background: @background;
+    alternate-normal-background: @background-color;
     alternate-normal-foreground: @foreground;
     alternate-urgent-background: @background;
     alternate-urgent-foreground: @foreground;
 
-    selected-active-background: {color10};
+    selected-active-background: {color6};
     selected-active-foreground: @foreground;
-    selected-normal-background: {color3};
+    selected-normal-background: {color6};
     selected-normal-foreground: @foreground;
-    selected-urgent-background: {color3};
+    selected-urgent-background: {color6};
     selected-urgent-foreground: @foreground;
 
-    background-color: @background;
-    background: {background};
+    background-color: rgba({background.rgb}, 0%);
+    background: rgba({background.rgb}, 40%);
     foreground: {foreground};
-    border-color: @background;
-    spacing: 2;
+    border-color: @background-color;
+    spacing: 1;
 }}
 
 #window {{
     background-color: @background;
-    border: 0;
-    padding: 2.5ch;
+    border: 0px;
+    border-color: {color6};
+    padding: 1.0ch;
 }}
 
 #mainbox {{
@@ -134,9 +136,9 @@ configuration {{
 }}
 
 #scrollbar {{
-    width: 4px;
+    width: 0px;
     border: 0;
-    handle-width: 8px;
+    handle-width: 0px;
     padding: 0;
 }}
 
