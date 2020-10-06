@@ -48,14 +48,15 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = "NotoSans Nerd Font:size=10;1"
-font-1 = "NotoSans Nerd Font:size=12;2"
-font-2 = "NotoSans Nerd Font:size=14;4"
+font-0 = "NotoSansDisplay Nerd Font:size=10;1"
+font-1 = "NotoSansDisplay Nerd Font:size=12;3"
+font-2 = "NotoSansDisplay Nerd Font:size=14;4"
 font-3 = "SauceCodePro Nerd Font:style=Regular:pixelsize=10;3"
-font-4 = "NotoSans Nerd Font"
+font-4 = "NotoSansDisplay Nerd Font"
+font-5 = "NotoSansDisplay Nerd Font:size=10;1"
 
 modules-left = tray polywins 
-modules-right = mpd sound cpu gpu memory currenttime powermenu
+modules-right = mpd sound cpu gpu memory currenttime nordvpn powermenu
 spacing = 2
 
 tray-scale = 1.0
@@ -167,7 +168,7 @@ date= %d %b
 time= %H:%M
 label= %time%   %date% 
 format-background=${colors.bg}
-format-padding = 2
+format-padding = 1
 ;}}}
 ; {{{ CPU
 [module/cpu]
@@ -226,11 +227,20 @@ menu-3-0-exec=shutdown now
 format-padding= 1
 format-background=${colors.bg}
 ; }}}
+; {{{ Nordvpn
+[module/nordvpn]
+type = custom/script
+exec = ~/.config/polybar/scripts/nordvpn.sh
+interval = 5
+label-padding = 1
+click-left = ~/.config/polybar/scripts/nordvpn.sh --toggle &
+label-font = 6
+; }}}
 ; {{{ Separator
 [module/separator]
 type = custom/text
-content =\
-content-padding = 2
+content =:  
+content-padding = 0
 content-background=${colors.bg}
 ; }}}
 ; }}}

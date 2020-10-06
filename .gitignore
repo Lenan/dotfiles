@@ -6,6 +6,8 @@
 ## zsh
 !/.Xresources
 !/.zshrc
+!/.config/doom/
+!/.config/doom/**
 !/.config/dunst/
 !/.config/dunst/**
 !/.config/i3/

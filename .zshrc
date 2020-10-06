@@ -95,6 +95,7 @@ export RANGER_LOAD_DEFAULT_RC='false'
  fi
  export EDITOR="nvim"
 
+ export PATH="$HOME/.emacs.d/bin:$PATH"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
