@@ -1,27 +1,30 @@
 configuration {{
-        display-drun: "Launch";
-        display-run: "Execute";
-        display-window: "Windows";
-        display-ssh: "SSH";
+        display-drun: "Launch:";
+        display-run: "Execute:";
+        display-window: "Windows:";
+        display-ssh: "SSH:";
         show-icons: true;
         sorting-method: "fzf";
-	 	sort: true;
-	 	lines: 10;
-	 	matching: "glob";
-	 	drun-match-fields: "name,generic,categories";
-	 	disable-history: false;
-	 	sidebar-mode: false;
+        sort: true;
+        columns: 1;
+        lines: 10;
+        matching: "glob";
+        drun-match-fields: "name,generic,categories";
+        disable-history: false;
+        sidebar-mode: false;
 }}
 * {{
-    width: 40%;
-	font: "NotoSans Nerd Font 14";
+    width:100%;
+    height:100%;
+    font: "NotoSans Nerd Font 16";
     active-background: {color3};
-    active-foreground: @foreground;
+    active-foreground: {color0};
     normal-background: @background-color;
     normal-foreground: @foreground;
     urgent-background: {color3};
     urgent-foreground: @foreground;
 
+    /*Every second entry in a list */
     alternate-active-background: {color6};
     alternate-active-foreground: @foreground;
     alternate-normal-background: @background-color;
@@ -29,10 +32,12 @@ configuration {{
     alternate-urgent-background: @background;
     alternate-urgent-foreground: @foreground;
 
+    /* Fixed one in window list */
     selected-active-background: {color6};
     selected-active-foreground: @foreground;
+    /* The one that you actually control */
     selected-normal-background: {color6};
-    selected-normal-foreground: @foreground;
+    selected-normal-foreground: {color0};
     selected-urgent-background: {color6};
     selected-urgent-foreground: @foreground;
 
@@ -40,14 +45,14 @@ configuration {{
     background: rgba({background.rgb}, 40%);
     foreground: {foreground};
     border-color: @background-color;
-    spacing: 1;
+    spacing: 0;
 }}
 
 #window {{
     background-color: @background;
     border: 0px;
     border-color: {color6};
-    padding: 1.0ch;
+    padding: 30%;
 }}
 
 #mainbox {{
@@ -66,13 +71,14 @@ configuration {{
 }}
 
 #inputbar {{
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+/*    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];*/
+    children:   [ prompt,entry];
 }}
 
 #textbox-prompt-colon {{
-    expand: false;
+    expand: true;
     str: ":";
-    margin: 0px 0.3em 0em 0em;
+    margin: 0px 0.0em 0em 0em;
     text-color: @normal-foreground;
 }}
 
@@ -86,7 +92,7 @@ configuration {{
 }}
 
 #element {{
-    border: 0;
+    border: 1px;
     padding: 1px;
 }}
 
@@ -118,6 +124,8 @@ configuration {{
 #element.selected.active {{
     background-color: @selected-active-background;
     text-color: @selected-active-foreground;
+    border: 1px;
+    border-color: {color6};
 }}
 
 #element.alternate.normal {{
@@ -157,9 +165,9 @@ configuration {{
 }}
 
 #inputbar {{
-    spacing: 0;
+    spacing: 0px;
     text-color: @normal-foreground;
-    padding: 1px;
+    padding: 0px;
 }}
 
 #case-indicator {{
@@ -167,12 +175,16 @@ configuration {{
     text-color: @normal-foreground;
 }}
 
+/* Actual inputbox */
 #entry {{
     spacing: 0;
-    text-color: @normal-foreground;
+    /*text-color: @normal-foreground; */
+    text-color: {color6};
 }}
 
+/* Label */
 #prompt {{
-    spacing: 0;
+    spacing: 0px;
+    margin: 0 0.2em 0 0;
     text-color: @normal-foreground;
 }}
