@@ -216,7 +216,7 @@ default_floating_border normal
 gaps inner 10
 gaps outer 0
 smart_gaps on
-smart_borders on
+##smart_borders on
 
 ## Autostart
 exec_always --no-startup-id $HOME/.config/i3/autostart.sh
