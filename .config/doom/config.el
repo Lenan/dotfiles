@@ -23,6 +23,7 @@
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 (setq doom-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 14)
       doom-big-font (font-spec :family "SauceCodePro Nerd Font Mono" :size 16))
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
@@ -36,7 +37,6 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -54,3 +54,41 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+;; ;; ;; NON-DEFAULT CUSTOM SETTINGS
+;; Move current line up or down
+(drag-stuff-global-mode 1)
+(map!
+ :g "C-j" 'drag-stuff-down
+ :g "C-k" 'drag-stuff-up
+)
+
+;; Dont move cursor 1 char back when exiting insert mode
+(setq evil-move-cursor-back nil)
+
+;; Use spaces instead of tabs for indent
+(setq-default tab-width 4 indent-tabs-mode nil)
+
+
+;; Comment or Uncomment Line/Block
+(defun comment-toggle ()
+      (interactive)
+      (let ((start (line-beginning-position))
+            (end (line-end-position)))
+        (when (or (not transient-mark-mode) (region-active-p))
+          (setq start (save-excursion
+                        (goto-char (region-beginning))
+                        (beginning-of-line)
+                        (point))
+                end (save-excursion
+                      (goto-char (region-end))
+                      (end-of-line)
+                      (point))))
+        (comment-or-uncomment-region start end)))
+
+(map! :g "C-," 'comment-toggle)
+
+;; Omnisharp
+(setq byte-compile-warnings '(cl-functions)) ;; Ignore the "X package cl is deprecated"-warning
+(setq omnisharp-server-executable-path "/home/lenan/.emacs.d/.local/etc/omnisharp/server/v1.37.1/run")
+(use-package! omnisharp :hook (csharp-mode . omnisharp-mode))
