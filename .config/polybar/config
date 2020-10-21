@@ -55,7 +55,7 @@ font-3 = "SauceCodePro Nerd Font:style=Regular:pixelsize=10;3"
 font-4 = "NotoSansDisplay Nerd Font"
 font-5 = "NotoSansDisplay Nerd Font:size=10;1"
 
-modules-left = tray polywins 
+modules-left = tray polywins
 modules-right = mpd sound cpu gpu memory currenttime nordvpn powermenu
 spacing = 2
 
@@ -93,39 +93,44 @@ label-background = ${colors.bg}
 [module/workspaces]
 type = internal/i3
 format = <label-state> <label-mode>
-index-sort=false
+index-sort=true
 wrapping-scroll=false
 pin-workspaces = true
+strip-wsnumbers= true
 
-label-mode-padding = 4
+label-mode-padding = 1
 label-mode-foreground = ${colors.fg}
 label-mode-background = ${colors.bg}
 
 ;label-focused = "%icon%"
-label-focused-background = ${colors.sel}
-label-focused-foreground = ${colors.fg}
-label-focused-underline = ${colors.grey}
+label-focused-background = ${colors.bg}
+label-focused-foreground = ${pywal.fg}
+label-focused-underline = ${pywal.fg}
 
-label-focused-padding = 4
+label-focused-padding = 1
 
 ;label-unfocused = "%icon%"
-label-unfocused-padding = 4
-label-unfocused-background = ${colors.grey}
-label-unfocused-foreground = ${colors.cur}
+label-unfocused-padding = 1
+label-unfocused-background = ${pywal.bg}
+label-unfocused-foreground = ${pywal.fg}
+label-unfocused-underline = ${pywal.fg}
 
 ;label-urgent = "%icon%"
 label-urgent-background = ${colors.orange}
 label-urgent-foreground = ${colors.fg}
 label-urgent-underline = ${colors.red}
-label-urgent-padding = 4
+label-urgent-padding = 0
 
 ;label-visible = "%icon%"
-label-visible-padding = 4
-label-visible-foreground = ${colors.bg}
-label-visible-background = ${colors.fg}
+label-visible-padding = 1
+label-visible-foreground = ${pywal.fg}
+label-visible-background = ${colors.bg}
+label-visible-underline = ${pywal.fg}
 
-ws-icon-0 = 1;
-ws-icon-1 = 2;﬏
+; ws-icon-0 = 1;
+; ws-icon-1 = 2;﬏
+ws-icon-0 = 1;
+ws-icon-1 = 2;
 ws-icon-2 = 3;
 ws-icon-3 = 4;
 ws-icon-4 = 5;
@@ -239,8 +244,8 @@ label-font = 6
 ; {{{ Separator
 [module/separator]
 type = custom/text
-content =:  
-content-padding = 0
+content = I
+content-padding = 2
 content-background=${colors.bg}
 ; }}}
 ; }}}

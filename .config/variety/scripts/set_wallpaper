@@ -211,8 +211,13 @@ if [[ " ${SIMPLE_WMS[*]} " = *" $XDG_CURRENT_DESKTOP "* || " ${SIMPLE_WMS[*]} " 
 		wal -n -i "$WP"
 		
 		#restart dunst with new color scheme
-		pkill dunst
-		dunst &
+		if pgrep -f dunst;
+		then
+			pkill dunst
+			dunst &
+		fi
+
+
         feh --bg-scale "$WP" 2> /dev/null
     elif command -v "nitrogen" >/dev/null 2>&1; then
         nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
@@ -246,8 +251,13 @@ gsettings set org.gnome.desktop.screensaver picture-uri "file://$WP" 2> /dev/nul
 # NOTE: This config will change the wallpaper after your current awesome theme sets it.
 # As such, the theme's wallpaper will briefly appear before being replaced with Variety's wallpaper.
 if [[ "$DESKTOP_SESSION" == "/usr/share/xsessions/awesome" ]]; then
+	#Generate colors with pywal
+	wal -n -i "$WP"
+	
+	#restart AwesomeWM
 	echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"$3\", 1, false)" | awesome-client
 	echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"$3\", 2, false)" | awesome-client
+	echo "awesome.restart()" | awesome-client
    
 fi
 

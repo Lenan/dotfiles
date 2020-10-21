@@ -1,0 +1,68 @@
+* {{
+width:100%;
+height:100%;
+font: "NotoSans Nerd Font 16";
+active-background: {color3};
+active-foreground: {color0};
+normal-background: @background-color;
+normal-foreground: @foreground;
+urgent-background: {color3};
+urgent-foreground: @foreground;
+
+/*Every second entry in a list */
+alternate-active-background: {color6};
+alternate-active-foreground: @foreground;
+alternate-normal-background: @background-color;
+alternate-normal-foreground: @foreground;
+alternate-urgent-background: @background;
+alternate-urgent-foreground: @foreground;
+
+    /* Fixed one in window list */
+selected-active-background: {color6};
+selected-active-foreground: @foreground;
+/* The one that you actually control */
+selected-normal-background: {color6};
+selected-normal-foreground: {color0};
+selected-urgent-background: {color6};
+selected-urgent-foreground: @foreground;
+background-color: rgba({background.rgb}, 0%);
+background: rgba({background.rgb}, 40%);
+foreground: {foreground};
+border-color: @background-color;
+spacing: 0;
+}}
+window {{
+background: @background;
+    children: [listview];
+}}
+
+mainbox {{
+    border:10;
+}}
+inputbar {{
+    enabled:false;
+}}
+message {{
+    enabled:false;
+}}
+textbox {{
+    enabled:false;
+}}
+listview {{
+   columns:5;
+   fixed-height:true;
+   lines:1;
+}}
+element {{
+   width:15em;
+}}
+element-text {{
+   enabled:false;
+}}
+element-icon {{
+    padding:10px;
+    size:15em;
+}}
+element-icon selected {{
+    background-color: @selected-active-background;
+}}

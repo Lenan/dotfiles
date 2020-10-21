@@ -1,11 +1,15 @@
-# all ignore #
+# ignore everything... #
 /*
 /.**
 !.config/
 
-## zsh
+## ... except for these files/folder
 !/.Xresources
 !/.zshrc
+!/.config/awesome/
+!/.config/awesome/**
+/.config/awesome/themes/
+!/.config/awesome/themes/variety/**
 !/.config/doom/
 !/.config/doom/**
 !/.config/dunst/
