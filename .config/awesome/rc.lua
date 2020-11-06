@@ -92,15 +92,19 @@ local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "kitty"
 local musicplayer  = "ncmpcpp"
+local sysmonitor   = "bpytop"
+local gpumonitor   = "gwe"
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nvim"
-local gui_editor   = os.getenv("GUI_EDITOR") or "emacs"
-local browser      = os.getenv("BROWSER") or "vivaldi-stable"
+local gui_editor   = os.getenv("GUI_EDITOR") or "code"
+local browser      = os.getenv("BROWSER") or "firefox"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
 awful.util.musicplayer = musicplayer
+awful.util.sysmonitor = sysmonitor
+awful.util.gpumonitor = gpumonitor
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -108,23 +112,23 @@ awful.layout.layouts = {
     awful.layout.suit.floating,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    --awful.layout.suit.max,
-    --awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier,
-    --awful.layout.suit.corner.nw,
-    --awful.layout.suit.corner.ne,
-    --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
-    --lain.layout.cascade,
-    --lain.layout.cascade.tile,
-    --lain.layout.centerwork,
-    --lain.layout.centerwork.horizontal,
-    --lain.layout.termfair,
-    --lain.layout.termfair.center,
+    awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.sw,
+    -- awful.layout.suit.corner.se,
+    -- lain.layout.cascade,
+    -- lain.layout.cascade.tile,
+    -- lain.layout.centerwork,
+    -- lain.layout.centerwork.horizontal,
+    -- lain.layout.termfair,
+    lain.layout.termfair.center,
 }
 
 awful.util.taglist_buttons = my_table.join(
@@ -334,21 +338,21 @@ globalkeys = my_table.join(
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.global_bydirection("down")    end,
+    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.bydirection("down")    end,
               {description = "swap client down", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.global_bydirection("up")    end,
+    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.bydirection("up")    end,
               {description = "swap client up", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "h", function () awful.client.swap.global_bydirection("left")    end,
+    awful.key({ modkey, "Shift"   }, "h", function () awful.client.swap.bydirection("left")    end,
               {description = "swap client left", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "l", function () awful.client.swap.global_bydirection("right")    end,
+    awful.key({ modkey, "Shift"   }, "l", function () awful.client.swap.bydirection("right")    end,
               {description = "swap client right", group = "client"}),
-    awful.key({ modkey, altkey }, "l", function () awful.screen.focus_relative( 1) end,
-              {description = "focus the next screen", group = "screen"}),
-    awful.key({ modkey, altkey }, "h", function () awful.screen.focus_relative(-1) end,
-              {description = "focus the previous screen", group = "screen"}),
+    awful.key({ modkey, }, "o", function () awful.screen.focus_relative( 1) end,
+              {description = "focus next screen", group = "screen"}),
+    -- awful.key({ modkey, altkey }, "h", function () awful.screen.focus_relative(-1) end,
+    --           {description = "focus the previous screen", group = "screen"}),
     -- awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
     --           {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
+    awful.key({ altkey,           }, "Tab",
         function ()
             if cycle_prev then
                 awful.client.focus.history.previous()
@@ -360,7 +364,7 @@ globalkeys = my_table.join(
             end
         end,
         {description = "cycle with previous/go back", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "Tab",
+    awful.key({ altkey, "Shift"   }, "Tab",
         function ()
             if cycle_prev then
                 awful.client.focus.byidx(1)
@@ -424,7 +428,11 @@ globalkeys = my_table.join(
               {description = "select next layout", group = "layout"}),
     -- awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
     --           {description = "select previous", group = "layout"}),
-
+    -- awful.key({ modkey }, "i", treetile.vertical,
+    --           {description = "Place new client vertically"}),
+    -- awful.key({ modkey }, "v", treetile.horizontal,
+    --           {description = "Place new client horizontally"}),
+    
     awful.key({ modkey, "Control" }, "n",
               function ()
                   local c = awful.client.restore()
@@ -441,12 +449,12 @@ globalkeys = my_table.join(
               {description = "dropdown application", group = "launcher"}),
 
     -- Widgets popups
-    awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
-              {description = "show calendar", group = "widgets"}),
-    awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
-              {description = "show filesystem", group = "widgets"}),
-    awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
-              {description = "show weather", group = "widgets"}),
+    -- awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
+    --           {description = "show calendar", group = "widgets"}),
+    -- awful.key({ altkey, }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
+    --           {description = "show filesystem", group = "widgets"}),
+    -- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
+    --           {description = "show weather", group = "widgets"}),
     awful.key({modkey, }, "space", function() awful.spawn.with_shell("rofi -show drun -modi drun,window,run") end,
               {description = "show rofi", group = "launcher"}),
     -- Brightness
@@ -527,10 +535,10 @@ globalkeys = my_table.join(
     --     {description = "mpc on/off", group = "widgets"}),
 
     -- Copy primary to clipboard (terminals to gtk)
-    awful.key({ modkey }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
+    awful.key({ modkey, "Control" }, "c", function () awful.spawn.with_shell("xsel | xsel -i -b") end,
               {description = "copy terminal to gtk", group = "hotkeys"}),
     -- Copy clipboard to primary (gtk to terminals)
-    awful.key({ modkey }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
+    awful.key({ modkey, "Control" }, "v", function () awful.spawn.with_shell("xsel -b | xsel") end,
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
@@ -802,3 +810,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
+beautiful.volume.update()
