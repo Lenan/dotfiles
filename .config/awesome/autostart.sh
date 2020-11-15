@@ -10,6 +10,7 @@ function run {
 }
 run /usr/lib/polkit-kde-authentication-agent-1
 start-pulseaudio-x11
+run nvidia-settings --load-config-only
 run picom --experimental-backends &
 run numlockx on &
 sleep 2

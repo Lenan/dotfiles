@@ -109,6 +109,7 @@ export RANGER_LOAD_DEFAULT_RC='false'
 # alias confohmyzsh ="nvim /home/lenan/.oh-my-zsh"
  alias confi3="cd ~/.config/i3/"
  alias confpolybar="cd ~/.config/polybar/"
+ alias confawesome="cd ~/.config/awesome/"
  alias ls="exa -1 --group-directories-first"
  alias la="exa -al --group-directories-first"
  alias r="ranger"

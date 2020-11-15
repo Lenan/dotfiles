@@ -269,6 +269,12 @@ root.buttons(my_table.join(
 
 -- {{{ Key bindings
 globalkeys = my_table.join(
+   -- Keyboard layout switcher
+   awful.key({altkey, "Control"}, "b",
+        function() 
+            beautiful.kbswitcher.switch_next()
+        end, 
+       {description = "Switch keyboard layout", group ="hotkeys"}),
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     -- awful.key({ altkey }, "p", function() os.execute("screenshot") end,
@@ -279,7 +285,7 @@ globalkeys = my_table.join(
               -- {description = "lock screen", group = "hotkeys"}),
 
     -- Hotkeys
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey, "Shift"   }, "s",      hotkeys_popup.show_help,
               {description = "show help", group="awesome"}),
     -- Tag browsing
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -404,9 +410,8 @@ globalkeys = my_table.join(
     awful.key({ modkey, "Shift" }, "d", function () lain.util.delete_tag() end,
               {description = "delete tag", group = "tag"}),
 
-    -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
-              {description = "open a terminal", group = "launcher"}),
+    -- Standard program / program shortcuts
+          
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     -- awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -445,8 +450,8 @@ globalkeys = my_table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Dropdown application
-    awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
-              {description = "dropdown application", group = "launcher"}),
+    --awful.key({ modkey, }, "z", function () awful.screen.focused().quake:toggle() end,
+    --          {description = "dropdown application", group = "launcher"}),
 
     -- Widgets popups
     -- awful.key({ altkey, }, "c", function () if beautiful.cal then beautiful.cal.show(7) end end,
@@ -455,8 +460,7 @@ globalkeys = my_table.join(
     --           {description = "show filesystem", group = "widgets"}),
     -- awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
     --           {description = "show weather", group = "widgets"}),
-    awful.key({modkey, }, "space", function() awful.spawn.with_shell("rofi -show drun -modi drun,window,run") end,
-              {description = "show rofi", group = "launcher"}),
+
     -- Brightness
     -- awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 10") end,
     --           {description = "+10%", group = "hotkeys"}),
@@ -542,8 +546,14 @@ globalkeys = my_table.join(
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show drun -modi drun,window,run") end,
+              {description = "show rofi", group = "launcher"}),
+    awful.key({ modkey }, "Return", function () awful.spawn(terminal) end,
+              {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey }, "s", function () awful.spawn("steam") end,
+              {description = "start steam", group="launcher"}),
     awful.key({ modkey }, "b", function () awful.spawn(browser) end,
-              {description = "run browser", group = "launcher"}),
+              {description = "run browser", group = "launcher"})
     -- awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
     --           {description = "run gui editor", group = "launcher"}),
 
@@ -569,8 +579,8 @@ globalkeys = my_table.join(
         {description = "show rofi", group = "launcher"}),
     --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"})
+    --awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
+    --          {description = "run prompt", group = "launcher"})
 
    --  awful.key({ modkey }, "x",
    --            function ()
@@ -595,15 +605,17 @@ clientkeys = my_table.join(
         end,
         {description = "toggle fullscreen", group = "client"}),
     awful.key({ modkey, "Control"   }, "q",      function (c) c:kill()                         end,
-              {description = "close", group = "client"}),
+              {description = "kill", group = "client"}),
     awful.key({ modkey,  }, "f",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ modkey,  "Shift"  }, "o",      function (c) c:move_to_screen()               end,
               {description = "move to next screen", group = "client"}),
-    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
+    awful.key({ modkey,  "Control"  }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
+    awful.key({ modkey, }, "t", function (c) awful.titlebar.toggle(c) end,
+              {description = "toggle titlebar", group = "client"}),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
@@ -773,25 +785,27 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c, {size = dpi(16)}) : setup {
+    awful.titlebar(c, {size = beautiful.bar_height}) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
+            awful.titlebar.widget.titlewidget(c),
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
+            -- { -- Title
+                -- align  = "center",
+                -- widget = awful.titlebar.widget.titlewidget(c)
+            -- },
+            -- buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
+            --awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.minimizebutton(c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            --awful.titlebar.widget.stickybutton   (c),
+            --awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
@@ -810,4 +824,3 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
-beautiful.volume.update()
