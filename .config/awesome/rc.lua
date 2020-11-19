@@ -12,6 +12,7 @@ local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, 
 local gears         = require("gears")
 local awful         = require("awful")
                       require("awful.autofocus")
+local ruled         = require("ruled")
 local wibox         = require("wibox")
 local beautiful     = require("beautiful")
 local naughty       = require("naughty")
@@ -23,7 +24,6 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi           = require("beautiful.xresources").apply_dpi
 -- }}}
-
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -468,24 +468,37 @@ globalkeys = my_table.join(
     --           {description = "-10%", group = "hotkeys"}),
 
     -- -- Pulse volume control
+    -- awful.key({ }, "XF86AudioRaiseVolume",
+        -- function ()
+            -- os.execute("pactl set-sink-volume @DEFAULT_SINK@ +5%")
+            -- beautiful.volume.update()
+        -- end,
+        -- {description = "volume up", group = "audio"}),
+    -- awful.key({  }, "XF86AudioLowerVolume",
+        -- function ()
+            -- os.execute("pactl set-sink-volume @DEFAULT_SINK@ -5%")
+            -- beautiful.volume.update()
+        -- end,
+        -- {description = "volume down", group = "audio"}),
+    -- awful.key({  }, "XF86AudioMute",
+        -- function ()
+            -- os.execute("pactl set-sink-mute @DEFAULT_SINK@ toggle")
+            -- beautiful.volume.update()
+        -- end,
+        -- {description = "toggle mute", group = "audio"}),
+    -- ALSA Volume control
     awful.key({ }, "XF86AudioRaiseVolume",
         function ()
-            os.execute("pactl set-sink-volume @DEFAULT_SINK@ +5%")
-            beautiful.volume.update()
+            os.execute("amixer -q set Master 5%+")
+            beautiful.alsa.update()
         end,
         {description = "volume up", group = "audio"}),
     awful.key({  }, "XF86AudioLowerVolume",
         function ()
-            os.execute("pactl set-sink-volume @DEFAULT_SINK@ -5%")
-            beautiful.volume.update()
+            os.execute("amixer -q set Master 5%-")
+            beautiful.alsa.update()
         end,
         {description = "volume down", group = "audio"}),
-    awful.key({  }, "XF86AudioMute",
-        function ()
-            os.execute("pactl set-sink-mute @DEFAULT_SINK@ toggle")
-            beautiful.volume.update()
-        end,
-        {description = "toggle mute", group = "audio"}),
     -- awful.key({ altkey, "Control" }, "m",
     --     function ()
     --         os.execute(string.format("amixer -q set %s 100%%", beautiful.volume.channel))
@@ -707,9 +720,23 @@ clientbuttons = gears.table.join(
 root.keys(globalkeys)
 -- }}}
 
--- {{{ Rules
+-- -- {{{ Rules
+-- -- Rules to apply to new notifications
+-- rules.notifications = {
+--     { rule = { message = "Studio loaded" },
+--         properties = {ignore = true }
+--     }
+-- }
+-- Rules to apply to new notifications
+ruled.notification.connect_signal('request::rules', function()
+    ruled.notification.append_rules ({
+    -- Ignore notifications of KXStudio's Cadence/LADISH
+    { rule_any = { message = {"Studio.*", "LADI.*"}},
+    properties = { ignore = true }}
+})
+end)
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
+ruled.client.append_rules ({
     -- All clients will match this rule.
     { rule = { },
       properties = { border_width = beautiful.border_width,
@@ -745,7 +772,7 @@ awful.rules.rules = {
     
     { rule = {name ="Steam Controller Configuration"},
         properties = {floating = true} },
-}
+})
 -- }}}
 
 -- {{{ Signals

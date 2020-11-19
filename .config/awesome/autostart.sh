@@ -9,7 +9,9 @@ function run {
     fi   
 }
 run /usr/lib/polkit-kde-authentication-agent-1
-start-pulseaudio-x11
+#start-pulseaudio-x11
+#run qjackctl
+run cadence-session-start --system-start
 run nvidia-settings --load-config-only
 run picom --experimental-backends &
 run numlockx on &
