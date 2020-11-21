@@ -75,7 +75,7 @@ ZSH_THEME=agnoster
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git alias-finder zsh-autosuggestions)
+plugins=(git alias-finder)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,8 +114,8 @@ export RANGER_LOAD_DEFAULT_RC='false'
  alias confi3="cd ~/.config/i3/"
  alias confpolybar="cd ~/.config/polybar/"
  alias confawesome="cd ~/.config/awesome/"
- alias ls="exa -1 --group-directories-first"
- alias la="exa -al --group-directories-first"
+ alias ls="exa -1F --group-directories-first"
+ alias la="exa -alF --group-directories-first"
  alias r="ranger"
  eval $(thefuck --alias f)
  alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

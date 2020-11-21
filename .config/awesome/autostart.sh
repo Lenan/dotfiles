@@ -8,6 +8,7 @@ function run {
         $@&
     fi   
 }
+run unclutter --root
 run /usr/lib/polkit-kde-authentication-agent-1
 #start-pulseaudio-x11
 #run qjackctl

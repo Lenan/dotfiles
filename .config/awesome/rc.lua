@@ -57,7 +57,7 @@ local function run_once(cmd_arr)
     end
 end
 
-run_once({ "unclutter -root" }) -- entries must be separated by commas
+--run_once({ "unclutter -root" }) -- entries must be separated by commas
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 -- This function implements the XDG autostart specification
 --[[
@@ -721,12 +721,6 @@ root.keys(globalkeys)
 -- }}}
 
 -- -- {{{ Rules
--- -- Rules to apply to new notifications
--- rules.notifications = {
---     { rule = { message = "Studio loaded" },
---         properties = {ignore = true }
---     }
--- }
 -- Rules to apply to new notifications
 ruled.notification.connect_signal('request::rules', function()
     ruled.notification.append_rules ({
@@ -766,8 +760,8 @@ ruled.client.append_rules ({
     { rule = { name ="Variety .*" },
       except = { name ="Variety Preferences"}, 
         properties = {floating = true, border_width = dpi(0), height = dpi(1050) } },
-
-    {rule = {instance = "origin.exe" },
+    
+    { rule = {instance = "origin.exe" },
         properties = {floating = true } },
     
     { rule = {name ="Steam Controller Configuration"},
