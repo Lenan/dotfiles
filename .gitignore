@@ -8,6 +8,7 @@
 !/.zshrc
 !/.config/awesome/
 !/.config/awesome/**
+!/.config/awesome/keyboard_layout/
 /.config/awesome/themes/
 !/.config/awesome/themes/variety/**
 !/.config/doom/
@@ -35,7 +36,7 @@
 !/LICENSE
 !.gitignore
 !.gitkeep
-
+!.gitmodules
 #ignore filetypes
 *~
 *_bk*
