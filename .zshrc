@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -75,7 +68,7 @@ ZSH_THEME=agnoster
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git alias-finder)
+# plugins=(git alias-finder)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,9 +90,7 @@ export RANGER_LOAD_DEFAULT_RC='false'
  else
    export EDITOR='nano'
  fi
- export EDITOR="nvim"
-
- export PATH="$HOME/.emacs.d/bin:$PATH"
+export EDITOR='nvim'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -114,19 +105,17 @@ export RANGER_LOAD_DEFAULT_RC='false'
  alias confi3="cd ~/.config/i3/"
  alias confpolybar="cd ~/.config/polybar/"
  alias confawesome="cd ~/.config/awesome/"
- alias ls="exa -1F --group-directories-first"
- alias la="exa -alF --group-directories-first"
+ alias ls="lsd -1 --blocks permission,size,date,name --date relative --group-dirs first"
+ alias la="lsd -Al --blocks permission,size,date,name --date relative --group-dirs first "
+ alias lt="lsd -Al --total-size --blocks permission,size,date,name --date relative --group-dirs first "
+ alias lat="lsd -A --tree --depth 3"
  alias r="ranger"
- eval $(thefuck --alias f)
+
  alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
- alias em="emacs"
 # alias n="nnn -a"
  alias nv="nvim"
-## P10k theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-prompt_context(){}
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 (cat ~/.cache/wal/sequences &)
+
+eval "$(starship init zsh)"
+colorscript random

@@ -24,6 +24,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 local my_table      = awful.util.table or gears.table -- 4.{0,1} compatibility
 local dpi           = require("beautiful.xresources").apply_dpi
 -- }}}
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -85,6 +86,7 @@ local themes = {
     "steamburn",       -- 9
     "variety",         -- 10
     "vertex",          -- 11
+    "remix",           -- 12
 }
 
 local chosen_theme = themes[10]
@@ -106,29 +108,29 @@ awful.util.musicplayer = musicplayer
 awful.util.sysmonitor = sysmonitor
 awful.util.gpumonitor = gpumonitor
 awful.util.tagnames = { "1", "2", "3", "4", "5" }
-awful.layout.layouts = {
+awful.layout.layouts = { 
     awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
     awful.layout.suit.floating,
     --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.tile.top,
+    -- awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.max,
     -- awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
+    -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
     -- lain.layout.cascade,
     -- lain.layout.cascade.tile,
-    -- lain.layout.centerwork,
+    lain.layout.centerwork,
     -- lain.layout.centerwork.horizontal,
     -- lain.layout.termfair,
-    lain.layout.termfair.center,
+    -- lain.layout.termfair.center,
 }
 
 awful.util.taglist_buttons = my_table.join(
@@ -260,7 +262,7 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 
 -- {{{ Mouse bindings
 root.buttons(my_table.join(
-               awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end)
+               awful.button({ }, 2, function () awful.util.mymainmenu:toggle() end)
 -- Rotate through workspaces with mousewheel
 --     awful.button({ }, 4, awful.tag.viewnext),
 --     awful.button({ }, 5, awful.tag.viewprev)
@@ -269,12 +271,7 @@ root.buttons(my_table.join(
 
 -- {{{ Key bindings
 globalkeys = my_table.join(
-   -- Keyboard layout switcher
-   awful.key({altkey, "Control"}, "b",
-        function() 
-            beautiful.kbswitcher.switch_next()
-        end, 
-       {description = "Switch keyboard layout", group ="hotkeys"}),
+        
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     -- awful.key({ altkey }, "p", function() os.execute("screenshot") end,
@@ -417,9 +414,9 @@ globalkeys = my_table.join(
     -- awful.key({ modkey, "Shift"   }, "q", awesome.quit,
     --           {description = "quit awesome", group = "awesome"}),
 
-    awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
+    awful.key({ modkey, altkey   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
-    awful.key({ altkey, "Shift"   }, "h",     function () awful.tag.incmwfact(-0.05)          end,
+    awful.key({ modkey, altkey }, "h",     function () awful.tag.incmwfact(-0.05)          end,
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ modkey, "Control"  }, "k",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of rows (aka. masters)", group = "layout"}),
@@ -566,7 +563,9 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "s", function () awful.spawn("steam") end,
               {description = "start steam", group="launcher"}),
     awful.key({ modkey }, "b", function () awful.spawn(browser) end,
-              {description = "run browser", group = "launcher"})
+              {description = "start browser", group = "launcher"}),
+    awful.key({ modkey }, "r", function() awful.spawn(terminal.. " ranger") end,
+              {description = "run ranger", group = "launcher"})
     -- awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
     --           {description = "run gui editor", group = "launcher"}),
 
@@ -759,13 +758,16 @@ ruled.client.append_rules ({
 
     { rule = { name ="Variety .*" },
       except = { name ="Variety Preferences"}, 
-        properties = {floating = true, border_width = dpi(0), height = dpi(1050) } },
+        properties = { floating = true, border_width = dpi(0), height = dpi(1050) } },
     
     { rule = {instance = "origin.exe" },
-        properties = {floating = true } },
+        properties = { floating = true } },
     
-    { rule = {name ="Steam Controller Configuration"},
-        properties = {floating = true} },
+    { rule = {name = "Steam Controller Configuration"},
+        properties = { floating = true} },
+
+    { rule = {name = "Factorio .*"},
+        properties = { floating = true, maximized = true, fullscreen = true} },
 })
 -- }}}
 
@@ -806,7 +808,11 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c, {size = beautiful.bar_height}) : setup {
+    awful.titlebar(c, {
+        size = beautiful.bar_height,
+        bg_normal = beautiful.border_normal,
+        bg_focus = beautiful.border_normal,
+    }) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             awful.titlebar.widget.titlewidget(c),
@@ -832,6 +838,7 @@ client.connect_signal("request::titlebars", function(c)
         },
         layout = wibox.layout.align.horizontal
     }
+
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.

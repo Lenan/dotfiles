@@ -250,13 +250,17 @@ gsettings set org.gnome.desktop.screensaver picture-uri "file://$WP" 2> /dev/nul
 # Be sure to start variety when you start awesome, such as by adding it to ~/.xinitrc
 # NOTE: This config will change the wallpaper after your current awesome theme sets it.
 # As such, the theme's wallpaper will briefly appear before being replaced with Variety's wallpaper.
-if [[ "$DESKTOP_SESSION" == "/usr/share/xsessions/awesome" ]]; then
-	#Generate colors with pywal
-	wal -n -i "$WP"
+if [[ "$XDG_SESSION_DESKTOP $DESKTOP_STARTUP_ID $DESKTOP_SESSION $XDG_CURRENT_DESKTOP" == *"awesome"* ]]; then
 	
-	#restart AwesomeWM
-	echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"$3\", 1, false)" | awesome-client
-	echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"$3\", 2, false)" | awesome-client
+    # Generate colors with pywal
+	wal -n -i "$WP"
+    
+    # Copy wallpaper to the awesome config folder, so it's easier to find for themes.
+    # You will have to change 'beautiful.wallpaper'(or whatever variable you use to set the wallpaper in your theme)
+    # to 'os.getenv("HOME") .. "/.config/awesome/wallpaper.jpg'
+    cp "$WP" ~/.config/awesome/wallpaper.jpg
+
+    #Awesome reloads wallpaper and colors on restart
 	echo "awesome.restart()" | awesome-client
    
 fi
