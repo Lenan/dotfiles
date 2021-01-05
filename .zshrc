@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/lenan/.oh-my-zsh"
@@ -33,7 +33,7 @@ ZSH_THEME=agnoster
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -69,18 +69,18 @@ ZSH_THEME=agnoster
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git alias-finder)
+plugins=(fzf zsh-interactive-cd)
+
+#fzf plugin
+export FZF_BASE='/usr/bin/fzf'
+export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 source $ZSH/oh-my-zsh.sh
-
 # User configuration
 #ranger (terminal file manager)
 export RANGER_LOAD_DEFAULT_RC='false'
-#nnn (terminal file manager)
-#export LC_COLLATE="C" #show dot files
-#export NNN_PLUG='p:preview_tui'
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
+#doom emacs
+export PATH="$HOME/.emacs.d/bin:$PATH"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -98,24 +98,24 @@ export EDITOR='nvim'
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias confzsh ="nvim /home/lenan/.zshrc"
-# alias confohmyzsh ="nvim /home/lenan/.oh-my-zsh"
- alias confi3="cd ~/.config/i3/"
- alias confpolybar="cd ~/.config/polybar/"
+
  alias confawesome="cd ~/.config/awesome/"
- alias ls="lsd -1 --blocks permission,size,date,name --date relative --group-dirs first"
- alias la="lsd -Al --blocks permission,size,date,name --date relative --group-dirs first "
- alias lt="lsd -Al --total-size --blocks permission,size,date,name --date relative --group-dirs first "
- alias lat="lsd -A --tree --depth 3"
+ alias ls="lsd" 
+ alias la="lsd -Al" 
+ alias lat="lsd -Al --total-size" 
+ alias lt="lsd -A --tree --depth 3"
  alias r="ranger"
 
  alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-# alias n="nnn -a"
- alias nv="nvim"
-
+ alias n="nvim"
+ alias e="emacs"
 (cat ~/.cache/wal/sequences &)
+
+#zsh-autocompletion settings
+#zstyle ':autocomplete:tab:*' fzf-completion yes
+#zstyle ':autocomplete:tab:*' widget-style menu-complete
+#zstyle ':completion:*:complete:*:' group-order \
+#    files local-directories builtins options arguments values history-words
 
 eval "$(starship init zsh)"
 colorscript random

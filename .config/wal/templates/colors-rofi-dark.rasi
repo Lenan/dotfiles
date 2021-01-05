@@ -16,7 +16,7 @@ configuration {{
 * {{
     width:100%;
     height:100%;
-    font: "NotoSans Nerd Font 16";
+    font: "Arimo Nerd Font 20";
     active-background: {color3};
     active-foreground: {color0};
     normal-background: @background-color;

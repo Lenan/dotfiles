@@ -2,13 +2,13 @@ lyrics_directory = ~/.config/ncmpcpp/lyrics
 mpd_host = localhost
 mpd_port = 6600
 mpd_music_dir = /home/lenan/Music
-external_editor = micro
+external_editor = nvim
 volume_change_step = 5
 
 ####visualizer settings####
-visualizer_fifo_path = "/tmp/mpd.fifo"
+visualizer_data_source = "/tmp/mpd.fifo"
 visualizer_output_name = "visualizer"
-visualizer_sync_interval = "25"
+####visualizer_sync_interval = "25"
 visualizer_type = "wave_filled"
 visualizer_color ="blue"
 visualizer_look = "^|"
@@ -32,7 +32,7 @@ message_delay_time= "1"
 
 # Progress Bar ..
 progressbar_look = "━━─"
-progressbar_boldness = "yes"
+#progressbar_boldness = "yes"
 progressbar_color = "black"
 progressbar_elapsed_color = "blue"
 
@@ -44,7 +44,7 @@ state_line_color = "white"
 state_flags_color = "blue"
 main_window_color = "blue" 
 header_window_color = "black"
-main_window_highlight_color = "blue"
+#main_window_highlight_color = "blue"
 
 # Misc ..   
 display_bitrate = "yes"

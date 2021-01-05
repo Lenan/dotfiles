@@ -205,7 +205,7 @@ local myawesomemenu = {
     { "manual", terminal .. " -e man awesome" },
     { "edit config", string.format("%s -e %s %s", terminal, editor, awesome.conffile) },
     { "restart", awesome.restart },
-    { "logout", function() awesome.quit() end }
+    -- { "logout", function() awesome.quit() end }
 }
 local sessionmenu = {
   {"logout", function () awesome.quit() end },
@@ -262,7 +262,7 @@ awful.screen.connect_for_each_screen(function(s) beautiful.at_screen_connect(s) 
 
 -- {{{ Mouse bindings
 root.buttons(my_table.join(
-               awful.button({ }, 2, function () awful.util.mymainmenu:toggle() end)
+               awful.button({ }, 3, function () awful.util.mymainmenu:toggle() end)
 -- Rotate through workspaces with mousewheel
 --     awful.button({ }, 4, awful.tag.viewnext),
 --     awful.button({ }, 5, awful.tag.viewprev)
@@ -565,7 +565,9 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "b", function () awful.spawn(browser) end,
               {description = "start browser", group = "launcher"}),
     awful.key({ modkey }, "r", function() awful.spawn(terminal.. " ranger") end,
-              {description = "run ranger", group = "launcher"})
+              {description = "run ranger", group = "launcher"}),
+    awful.key({ modkey }, "v", function() awful.spawn("teamspeak3") end,
+              {description = "run teamspeak", group = "launcher"})
     -- awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
     --           {description = "run gui editor", group = "launcher"}),
 
@@ -757,20 +759,20 @@ ruled.client.append_rules ({
         properties = { maximized = true } },
 
     { rule = { name ="Variety .*" },
-      except = { name ="Variety Preferences"}, 
+        except = { name ="Variety Preferences"},
         properties = { floating = true, border_width = dpi(0), height = dpi(1050) } },
     
     { rule = {instance = "origin.exe" },
         properties = { floating = true } },
     
-    { rule = {name = "Steam Controller Configuration"},
-        properties = { floating = true} },
-
-    { rule = {name = "Factorio .*"},
+    { rule = { name = "Steam Controller Configuration"},
+        properties = { floating = true } },
+    { rule = { name = "Friends List.*"},
+        properties = { tag = screen[2].tags[1] } },
+    { rule = { name = "Factorio .*"},
         properties = { floating = true, maximized = true, fullscreen = true} },
 })
 -- }}}
-
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
@@ -807,6 +809,9 @@ client.connect_signal("request::titlebars", function(c)
             awful.mouse.client.resize(c)
         end)
     )
+    
+    local titlewidget = awful.titlebar.widget.titlewidget(c)
+    titlewidget.ellipsize = "end"
 
     awful.titlebar(c, {
         size = beautiful.bar_height,
@@ -815,24 +820,24 @@ client.connect_signal("request::titlebars", function(c)
     }) : setup {
         { -- Left
             awful.titlebar.widget.iconwidget(c),
-            awful.titlebar.widget.titlewidget(c),
+            titlewidget,
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
             -- { -- Title
                 -- align  = "center",
-                -- widget = awful.titlebar.widget.titlewidget(c)
+                -- widget = titlewidget
             -- },
             -- buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            --awful.titlebar.widget.floatingbutton (c),
+            awful.titlebar.widget.stickybutton   (c),
+            awful.titlebar.widget.ontopbutton    (c),
+            awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.minimizebutton(c),
             awful.titlebar.widget.maximizedbutton(c),
-            --awful.titlebar.widget.stickybutton   (c),
-            --awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
@@ -852,3 +857,6 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
+
+-- Second screen was focused after startup. This sets it to the first(left) monitor
+awful.screen.focus(awful.screen.getbycoord(0,0))

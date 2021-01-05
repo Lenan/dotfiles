@@ -9,8 +9,8 @@ function run {
     fi   
 }
 run unclutter --root
-# run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-run /usr/lib/polkit-kde-authentication-agent-1
+run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+#run /usr/lib/polkit-kde-authentication-agent-1
 #start-pulseaudio-x11
 #run qjackctl
 run cadence-session-start --system-start
