@@ -8,13 +8,14 @@
 !/.zshrc
 !/.config/awesome/
 !/.config/awesome/**
-!/.config/awesome/keyboard_layout/
 /.config/awesome/themes/
 !/.config/awesome/themes/variety/**
 !/.config/doom/
 !/.config/doom/**
 !/.config/dunst/
 !/.config/dunst/**
+!/.config/fish
+!/.config/fish/**
 !/.config/i3/
 !/.config/i3/**
 !/.config/kitty/

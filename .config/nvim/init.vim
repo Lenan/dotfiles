@@ -1,27 +1,3 @@
-"{{{ Options 
-set ignorecase
-set autoindent
-set incsearch
-set termguicolors
-"Hide <-- Insert -->Text(Bottom) because we're using linelight
-set noshowmode
-set number
-"set relativenumber
-set signcolumn=number
-set foldmethod=marker
-set nowrap
-colorscheme slate
-
-function! CustomFoldText()
-	let line= getline(v:foldstart)
-	let folded_line_num = v:foldend - v:foldstart
-	let line_text = substitute(line, '^[;|"] *{\+', '', 'g')
-	let fillcharcount = &textwidth -len(line_text) -len(folded_line_num)
-	return '+'. line_text . '(' . folded_line_num . 'L) ' 
-endfunction
-set foldtext=CustomFoldText()
-"}}}
-
 "{{{ Plug 
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'kevinoid/vim-jsonc'
@@ -33,6 +9,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'rakr/vim-one'
 Plug 'rust-lang/rust.vim'
+Plug 'ntk148v/vim-horizon'
 call plug#end()
 "}}}
 
@@ -196,3 +173,28 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv"
 " }}}
+
+"{{{ Options 
+set ignorecase
+set autoindent
+set incsearch
+set termguicolors
+"Hide <-- Insert -->Text(Bottom) because we're using linelight
+set noshowmode
+set number
+"set relativenumber
+set signcolumn=number
+set foldmethod=marker
+set nowrap
+colorscheme one
+
+function! CustomFoldText()
+	let line= getline(v:foldstart)
+	let folded_line_num = v:foldend - v:foldstart
+	let line_text = substitute(line, '^[;|"] *{\+', '', 'g')
+	let fillcharcount = &textwidth -len(line_text) -len(folded_line_num)
+	return '+'. line_text . '(' . folded_line_num . 'L) ' 
+endfunction
+set foldtext=CustomFoldText()
+"}}}
+

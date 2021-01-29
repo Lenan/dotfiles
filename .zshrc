@@ -8,7 +8,7 @@ export ZSH="/home/lenan/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME=agnoster
+ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -69,7 +69,8 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git alias-finder)
-plugins=(fzf zsh-interactive-cd)
+#plugins=(fzf zsh-autosuggestions zsh-interactive-cd zsh-syntax-highlighting)
+plugins=(fzf zsh-autosuggestions zsh-interactive-cd fast-syntax-highlighting)
 
 #fzf plugin
 export FZF_BASE='/usr/bin/fzf'
@@ -88,9 +89,8 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='micro'
  else
-   export EDITOR='nano'
+   export EDITOR='nvim'
  fi
-export EDITOR='nvim'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -109,13 +109,15 @@ export EDITOR='nvim'
  alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
  alias n="nvim"
  alias e="emacs"
-(cat ~/.cache/wal/sequences &)
+#(cat ~/.cache/wal/sequences &)
 
 #zsh-autocompletion settings
 #zstyle ':autocomplete:tab:*' fzf-completion yes
 #zstyle ':autocomplete:tab:*' widget-style menu-complete
 #zstyle ':completion:*:complete:*:' group-order \
 #    files local-directories builtins options arguments values history-words
+#zstyle ':completion:*:complete:*:' tag-order \
+#  '! ancestor-directories recent-directories recent-files' -
 
 eval "$(starship init zsh)"
 colorscript random
