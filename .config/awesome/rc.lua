@@ -1,11 +1,15 @@
 -- {{{ Required libraries
 local awful         = require("awful")
 require("awful.autofocus")
-local gears = require("gears")
 local beautiful     = require("beautiful")
 -- }}}
 
-require("config.errorhandling")
+-- autostart desired programs
+awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+-- Second screen was focused after startup. This sets it to the first(left) monitor
+-- awful.screen.focus(awful.screen.getbycoord(0,0))
+
+require("custom.errorhandling")
 
 local themes = {
     "blackburn",       -- 1
@@ -26,14 +30,8 @@ local chosen_theme = themes[10]
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 
-require("config.wallpaper")
-require("config.rules")
-require("config.tags")
-require("config.signals")
-require("config.keys")
-
-
--- Second screen was focused after startup. This sets it to the first(left) monitor
-awful.screen.focus(awful.screen.getbycoord(0,0))
-
-awful.spawn.with_shell("~/.config/awesome/autostart.sh")
+require("custom.wallpaper")
+require("custom.rules")
+require("custom.tags")
+require("custom.signals")
+require("custom.keys")

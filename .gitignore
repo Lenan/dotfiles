@@ -9,6 +9,7 @@
 !/.config/awesome/
 !/.config/awesome/**
 /.config/awesome/themes/
+!/.config/awesome/themes/variety/
 !/.config/awesome/themes/variety/**
 !/.config/doom/
 !/.config/doom/**
@@ -44,3 +45,4 @@
 *_gui*
 *.netrwhist
 *.log
+*.db

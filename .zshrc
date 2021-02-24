@@ -74,7 +74,7 @@ plugins=(fzf zsh-autosuggestions zsh-interactive-cd fast-syntax-highlighting)
 
 #fzf plugin
 export FZF_BASE='/usr/bin/fzf'
-export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
+#export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 
 source $ZSH/oh-my-zsh.sh
 # User configuration

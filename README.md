@@ -34,7 +34,6 @@ I slightly modified the setter script to work better with AwesomeWm and to gener
 
 #### AwesomeWM Widgets:
 *	[lain widgets](https://github.com/lcpz/lain)
-* [keyboard_layout](https://github.com/echuraev/keyboard_layout)
 
 #### Pywal
 There are some colorschemes we need to hook up manually. Before we can do that though, you'll have to run `pywal` atlest once or else it doesn't generate the necessary files. After you do that

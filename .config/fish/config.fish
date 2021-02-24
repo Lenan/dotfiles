@@ -296,3 +296,4 @@ end
 
 # Starship prompt
 starship init fish | source
+bind \co ranger-cd
