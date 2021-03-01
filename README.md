@@ -2,11 +2,11 @@
 These are my personal dotfiles. If you want to use my setup/colors, you will have to kinda mix and match... I've left some notes for the most important parts.
 ####Program list:
 
-* [AwesomeWM(git)](https://awesomewm.org) most of my configs are configured for this WM <br>
+* [AwesomeWM(git)](https://awesomewm.org)<br>
 * [rofi](https://github.com/davatorium/rofi)
 * [pywal](https://github.com/dylanaraps/pywal) 
 * [Variety](https://github.com/varietywalls/variety)<br>
-*Note:*I slightly modified the setter script to work better with AwesomeWm and to generate colorschemes with pywall
+** Note: I slightly modified variety's setter script to work better with AwesomeWm and to generate colorschemes with pywall
 
 
 ## Additional setup information:
@@ -16,7 +16,7 @@ These are my personal dotfiles. If you want to use my setup/colors, you will hav
 * Any Nerd Font patched Font for the glyphs
 
 #### AwesomeWM Widgets:
-*	[lain widgets](https://github.com/lcpz/lain)
+* [lain widgets](https://github.com/lcpz/lain)
 
 #### Pywal
 There are some colorschemes we need to hook up manually. Before we can do that though, you'll have to run `pywal` atlest once or else it doesn't generate the necessary files. After you do that
