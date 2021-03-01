@@ -245,8 +245,8 @@ fi
 # As such, the theme's wallpaper will briefly appear before being replaced with Variety's wallpaper.
 if [[ "$XDG_SESSION_DESKTOP $DESKTOP_STARTUP_ID $DESKTOP_SESSION $XDG_CURRENT_DESKTOP" == *"awesome"* ]]; then
 	cp "$WP" ~/.config/awesome/wallpaper.jpg
-	wal -ni "$WP"
-	echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"/home/lenan/.config/awesome/wallpaper.jpg\", nil)" | awesome-client
+	wal -ni "$WP" -b 000000
+	#echo "local gears = require(\"gears\") gears.wallpaper.maximized(\"/home/lenan/.config/awesome/wallpaper.jpg\", nil)" | awesome-client
 	echo "awesome.restart()" | awesome-client
 fi
 

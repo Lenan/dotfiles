@@ -1,80 +1,79 @@
 local awful = require("awful")
 local gears = require("gears")
 local wibox = require("wibox")
-local theme = require("beautiful")
-local lain = require("lain")
+local beautiful = require("beautiful").get()
 local dpi = require("beautiful.xresources").apply_dpi
 local keys = require("custom.keys")
-local tags = require("custom.tags")
 
-local markup = lain.util.markup
-
+-- import widgets
+--local alsa = require("custom.widgets.alsa")
+--local pulse = require("custom.widgets.pulse")
+local systray = require("custom.widgets.systray")
 local cpu = require("custom.widgets.cpu")
+local clock = require("custom.widgets.clock_calendar")
+local pipewire = require("custom.widgets.pipewire_pulse")
+local gpu = require("custom.widgets.nvidia")
+local ram = require("custom.widgets.ram")
+local vpn = require("custom.widgets.vpn")
+local mpd = require("custom.widgets.mpd")
+--local powermenu = require("custom.widgets.powermenu")
+local powermenu_alt = require("custom.widgets.powermenu-alt")
 
-
-local wibar = {}
-
-local tagnames = {"1","2"}
-function wibar.on_screen_connect(s)
-    s.cpu = cpu
-    -- Quake application
-    -- s.quake = lain.util.quake({ app = apps.terminal })
-
-    -- If wallpaper is a function, call it with the screen
-    local wallpaper = theme.wallpaper
-    if type(wallpaper) == "function" then
-        wallpaper = wallpaper(s)
-    end
-    gears.wallpaper.maximized(wallpaper, s, true)
+function On_screen_connect(s)
 
     -- Tags
-    awful.tag(tagnames, s, layouts)
+     s.mytaglist = awful.widget.taglist {
+         screen = s,
+         filter = awful.widget.taglist.filter.all,
+         buttons = keys.taglist,
+         layout = {
+             layout = wibox.layout.fixed.horizontal
+         },
+         widget_template = {
+		{
+			{
+			     {
+				forced_width = dpi(12),
+				id = 'text_role',
+				widget = wibox.widget.textbox,
+			     },
+			     layout = wibox.layout.flex.horizontal,
+		     },
+		     left = dpi(2),
+		     right = dpi(2),
+		     widget = wibox.container.margin,
+		},
+		id = 'background_role',
+		widget = wibox.container.background
+	 }
+      }
 
-    -- Create  clock & calendar
-   s.textclock = wibox.widget.textclock(
-        markup(accent, " ") ..
-        markup(normal, "%d %b ") ..
-        markup(accent, " ") ..
-        markup(normal, "%H:%M ")
-   )
-    s.textclock.font = theme.font
-
-    s.cal = awful.widget.calendar_popup.month(
-        {
-            margin = dpi(4),
-            bg = theme.bg_normal,
-            style_focus = { fg_color = accent },
-            style_month = {
-                padding = dpi(10),
-                border_color = accent,
-                border_width = dpi(4)
-            }
-        }
-    )
-    s.cal:attach(s.textclock, 'tr')
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox = wibox.widget {
+		{
+			 awful.widget.layoutbox(s),
+			 margins = dpi(8),
+			 widget = wibox.container.margin,
+		},
+		widget = wibox.container.margin,
+	}
+
+
     s.mylayoutbox:buttons(awful.util.table.join(
                            awful.button({}, 1, function () awful.layout.inc( 1) end),
-                           awful.button({}, 2, function () awful.layout.set( layouts[1] ) end),
+--                           awful.button({}, 2, function () awful.layout.set( layouts[1] ) end),
                            awful.button({}, 3, function () awful.layout.inc(-1) end),
                            awful.button({}, 4, function () awful.layout.inc( 1) end),
                            awful.button({}, 5, function () awful.layout.inc(-1) end)))
 
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, keys.taglist)
 
     -- Create a tasklist widget
     -- s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
-    taskbtns = keys.tasklist
     s.mytasklist = awful.widget.tasklist {
         screen   = s,
         filter   = awful.widget.tasklist.filter.currenttags,
-        buttons  = taskbtns,
+        buttons  = keys.tasklist,
         layout   = {
             layout  = wibox.layout.fixed.horizontal,
         },
@@ -82,46 +81,36 @@ function wibar.on_screen_connect(s)
         -- not a widget instance.
         widget_template = {
                     {
-                        wibox.widget.base.make_widget(),
-                        forced_height = 3,
+                        forced_height = dpi(3),
                         id = 'background_role',
+			shape = gears.shape.rounded_bar,
                         widget = wibox.container.background,
                     },
                     {
-                        {
-                            id = 'clienticon',
-                            awful.widget.clienticon,
-                            margins = dpi(5),
-                            widget = wibox.container.margin
-                        },
-                        {
-                            id = 'text_role',
-                            widget = wibox.widget.textbox
-                        },
-                        layout = wibox.layout.align.horizontal,
+			{
+				{
+				    id = 'clienticon',
+				    awful.widget.clienticon,
+				    margins = dpi(5),
+				    left= dpi(0),
+				    widget = wibox.container.margin
+				},
+				{
+				    id = 'text_role',
+				    widget = wibox.widget.textbox
+				},
+				layout = wibox.layout.align.horizontal,
+			},
+			right = dpi(5),
+			left = dpi(5),
+			widget = wibox.container.margin,
                     },
-                    layout = wibox.layout.fixed.vertical,
+                    layout = wibox.layout.align.vertical,
         }
     }
-    -- Systray
-    s.systray = wibox.widget.systray()
-    s.systray:set_base_size(dpi(16))
-    s.systraybox = wibox.widget {
-            {
-                {
-                    widget = wibox.widget.systray(),
-                },
-                left = dpi(0),
-                top = dpi(5),
-                bottom = dpi(3),
-                right = dpi(4),
-                widget = wibox.container.margin,
-            },
-            widget=wibox.container.background,
-        }
 
     -- -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = theme.bar_height, bg = theme.bg_normal, fg = theme.fg_normal })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = beautiful.bar_height, bg = beautiful.bg_normal, fg = beautiful.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -129,32 +118,31 @@ function wibar.on_screen_connect(s)
         { -- Left widgets
             layout = wibox.layout.align.horizontal,
             s.mylayoutbox,
-            s.systraybox,
-            -- s.mytaglist,
+            s.mytaglist,
             -- s.mypromptbox,
         },
         {
             s.mytasklist, -- Middle widget
             expand = "none",
-            layout = wibox.layout.fixed.horizontal,
+            layout = wibox.layout.align.horizontal,
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            -- theme.mpd.widget,
-            -- theme.volume.widget,
-            -- theme.pulse.widget,
-            -- theme.alsa.widget
-            -- theme.pactl,
-            -- theme.cpu.widget,
-            -- theme.gpu,
-            -- theme.gpu_percent_symbol,
-            -- theme.mem.widget,
-            -- theme.nordvpn,
-            -- mytextclock,
-            s.cpu,
-            s.clock,
-            -- powermenu.menu,
+	    spacing = beautiful.widget_spacing,
+	    --pulse,
+	    mpd,
+	    pipewire,
+	    cpu,
+	    gpu,
+	    ram,
+	    vpn,
+	    clock,
+	    systray,
+	    --powermenu,
+	    powermenu_alt,
         },
     }
 end
-return wibar
+
+-- Create a wibox for each screen and add it
+awful.screen.connect_for_each_screen(function(s) On_screen_connect(s) end)

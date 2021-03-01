@@ -4,34 +4,33 @@ local beautiful = require("beautiful")
 local dpi = require("beautiful.xresources").apply_dpi
 local lain = require("lain")
 
-local font = beautiful.font
 local markup = lain.util.markup
-local accent = beautiful.border_focus
-local normal = beautiful.fg_normal
-
 
 -- Textclock
 local widget = {}
 widget.textclock = wibox.widget.textclock(
-        markup(accent, " ") ..
-        markup(normal, "%d %b ") ..
-        markup(accent, " ") ..
-        markup(normal, "%H:%M ")
+      markup.font(beautiful.icon_font, markup(beautiful.icon_accent, beautiful.cal_icon )) ..
+      markup.font(beautiful.font, markup(beautiful.fg_normal, " %d %b "))..
+      markup.font(beautiful.icon_font, markup(beautiful.icon_accent, beautiful.clock_icon )) ..
+      markup.font(beautiful.font, markup(beautiful.fg_normal, " %H:%M "))
 )
-widget.textclock.font = font
 
 widget.cal = awful.widget.calendar_popup.month(
     {
         margin = dpi(4),
-        bg = beautiful.bg_normal,
-        style_focus = { fg_color = accent },
+        bg = beautiful.fg_focus,
+        style_focus = { 
+		fg_color = beautiful.fg_normal,
+		bg_color = beautiful.fg_focus
+	},
         style_month = {
             padding = dpi(10),
-            border_color = accent,
-            border_width = dpi(4)
+	    bg = beautiful.fg_focus,
+            border_color = beautiful.fg_focus,
+            border_width = dpi(2)
         }
     }
 )
-widget.cal:attach(widget.textclock, 'tr')
+--widget.cal:attach(widget.textclock, 'tr')
 
-return widget
+return widget.textclock

@@ -46,7 +46,8 @@ ruled.client.append_rules ({
 
     --Rules for kitty
     { rule_any = { class = { "kitty" } },
-      properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
+--      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } --Nerd Font
+      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } --Font Awesome
     },
 
     --Rules for GIMP
@@ -55,11 +56,13 @@ ruled.client.append_rules ({
     },
 
     { rule_any = { name = { "Firefox" } },
-       properties = { screen = mouse.screen, tag = "爵", switch_to_tags = true }
+--       properties = { screen = mouse.screen, tag = "爵", switch_to_tags = true } -- Nerd Font
+       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
     },
 
     { rule_any = { class = { "qutebrowser" } },
-       properties = { screen = mouse.screen, tag = "爵", switch_to_tags = true }
+--       properties = { screen = mouse.screen, tag = "爵", switch_to_tags = true } -- Nerd Font
+       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
     },
     -- Rule for Variety Wallpapers
     { rule_any = { name = { "Variety .*" } },
@@ -69,25 +72,27 @@ ruled.client.append_rules ({
 
     -- Rule for Origin
     { rule_any = { instance = { "origin.exe" }, name = { "Origin.*" } },
-      properties = { screen = mouse.screen, tag = "", switch_to_tags = true, floating = true }
+      properties = { floating = true } 
     },
 
     -- Rule for Epic Games Launcher
     { rule_any = { instance = { "epicgameslauncher.exe" }, name = { "Epic Games Launcher.*" } },
-      properties = { screen = mouse.screen, tag = "", switch_to_tags = true, floating = true }
+      properties = { floating = true }
     },
 
     -- Star Wars Battlefront 2 (2017)
     { rule_any = { class = { "starwarsbattlefrontii.exe" } },
-      properties = { screen = mouse.screen, tag = "", switch_to_tags = true, floating = true, fullscreen = true }
+      properties = { floating = true } 
     },
 
     { rule_any = { name = { "Lutris" } },
-       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
+ --      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } -- Nerd Font
+       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
     },
 
     -- Rules for Steam
     { rule_any = { name = { "Steam" } },
+--      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } -- Nerd Font
       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
     },
 

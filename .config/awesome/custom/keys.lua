@@ -3,7 +3,7 @@ local ipairs, string, os, table, tostring, tonumber, type = ipairs, string, os, 
 local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local naughty = require("naughty")
+--local naughty = require("naughty")
 local lain = require("lain")
 
 local hotkeys_popup = require("awful.hotkeys_popup")
@@ -188,13 +188,11 @@ keys.globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioRaiseVolume",
         function ()
             os.execute("pactl set-sink-volume @DEFAULT_SINK@ +5%")
-            beautiful.pulse.update()
         end,
         {description = "volume up", group = "audio"}),
     awful.key({  }, "XF86AudioLowerVolume",
         function ()
             os.execute("pactl set-sink-volume @DEFAULT_SINK@ -5%")
-            beautiful.pulse.update()
         end,
         {description = "volume down", group = "audio"}),
     -- awful.key({  }, "XF86AudioMute",
@@ -431,15 +429,15 @@ keys.taglist = gears.table.join(
         if client.focus then
             client.focus:move_to_tag(t)
         end
-    end),
-    awful.button({ }, 3, awful.tag.viewtoggle),
-    awful.button({ modkey }, 3, function(t)
-        if client.focus then
-            client.focus:toggle_tag(t)
-        end
-    end),
-    awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-    awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+    end)
+    --awful.button({ }, 3, awful.tag.viewtoggle),
+    --awful.button({ modkey }, 3, function(t)
+    --    if client.focus then
+    --        client.focus:toggle_tag(t)
+    --    end
+    --end),
+    --awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
+    --awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
 -- Set keys

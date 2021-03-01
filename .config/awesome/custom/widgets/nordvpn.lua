@@ -17,20 +17,16 @@ local gears     = require("gears")
 local lain      = require("lain")
 local markup    = lain.util.markup
 
-local PATH_TO_ICONS       = "/usr/share/icons/Arc-X-D/status/symbolic/"
-local CONNECTED_GLYPH     = "聯 "
-local DISCONNECTED_GLYPH  = "輦 "
-local CONNECTED_ICON      = PATH_TO_ICONS .. "network-vpn-symbolic.svg"
-local DISCONNECTED_ICON   = PATH_TO_ICONS .. "network-vpn-disconnected-symbolic.svg"
+local CONNECTED_GLYPH     = beautiful.vpn_icon_connected
+local DISCONNECTED_GLYPH  = beautiful.vpn_icon_disconnected
 local NORD_STATUS_CMD     = 'nordvpn status'
 local NORD_CONNECT_CMD    = 'nordvpn c'
 local NORD_DISCONNECT_CMD = 'nordvpn d'
 
 local this = { connected = false }
 
---------------------------------------------------------------------------------
+
 -- returns the connected state
---------------------------------------------------------------------------------
 local function parse_connected(stdout)
     local status = string.match(stdout, "Status: (%a+)")
     if status ~= nil and status:lower() == "connected" then
@@ -39,9 +35,7 @@ local function parse_connected(stdout)
     return false
 end
 
---------------------------------------------------------------------------------
 -- Set the icons and last_stdout based on the parse results
---------------------------------------------------------------------------------
 local function update_status(vpn_conn_obj, stdout, _, _, _)
     local is_connected = parse_connected(stdout)
     vpn_conn_obj.connected = is_connected
@@ -51,52 +45,23 @@ local function update_status(vpn_conn_obj, stdout, _, _, _)
 
     vpn_conn_obj.last_stdout = stdout;
     if is_connected then
-        vpn_conn_obj.widget:set_markup(markup.font(beautiful.font, markup(beautiful.border_focus, CONNECTED_GLYPH)))
+        vpn_conn_obj.widget:set_markup(markup.font(beautiful.icon_font, markup(beautiful.icon_accent, CONNECTED_GLYPH)))
     else
-        vpn_conn_obj.widget:set_markup(markup.font(beautiful.font, markup(beautiful.fg_normal, DISCONNECTED_GLYPH)))
+        vpn_conn_obj.widget:set_markup(markup.font(beautiful.icon_font, markup(beautiful.fg_normal, DISCONNECTED_GLYPH)))
     end
-        
-    -- vpn_conn_obj.widget.icon.image = gears.color.recolor_image(
-    --     vpn_conn_obj.connected and vpn_conn_obj.connected_icon or vpn_conn_obj.disconnected_icon,
-    --     beautiful.fg_normal
-    -- )
 
     if vpn_conn_obj.display_notification and vpn_conn_obj.notification then
-        vpn_conn_obj.notification.image = gears.color.recolor_image(
-            vpn_conn_obj.connected and vpn_conn_obj.connected_icon or vpn_conn_obj.disconnected_icon,
-            beautiful.fg_normal
-        )
         naughty.replace_text(vpn_conn_obj.notification, "VPN Connection Status", stdout)
     end
 end
 
 local function worker(args)
-    ----------------------------------------------------------------------------
-    -- Initial Config
     local args = args or {}
 
     this.display_notification = args.display_notification or true
     this.notification_position = args.notification_position or "top_right"
-    this.connected_icon = args.connected_icon or CONNECTED_ICON
-    this.disconnected_icon = args.disconnected_icon or DISCONNECTED_ICON
-    ----------------------------------------------------------------------------
 
-    ----------------------------------------------------------------------------
     this.widget = wibox.widget.textbox()
-    
-    -- Widget Creation
-    -- this.widget = wibox.widget {
-    --     {
-    --         id = "icon",
-    --         image = gears.color.recolor_image(this.disconnected_icon, beautiful.fg_normal),
-    --         widget = wibox.widget.imagebox,
-    --     },
-    --     layout = wibox.container.margin(_, _, _, 3),
-    -- }
-    -- ----------------------------------------------------------------------------
-
-    ----------------------------------------------------------------------------
-    -- Internal Functions
 
     -- Run a given command and then run an update command.
     function this:_cmd(cmd)
@@ -125,10 +90,6 @@ local function worker(args)
             naughty.destroy(this.notification)
             this.notification = naughty.notify{
                 text = this.last_stdout,
-                icon = gears.color.recolor_image(
-                    this.connected and this.connected_icon or this.disconnected_icon,
-                    beautiful.fg_normal
-                ),
                 title = "VPN Connection Status",
                 position = this.notification_position,
                 timeout = keep and 0 or 2,
@@ -145,9 +106,8 @@ local function worker(args)
             this:_cmd(NORD_CONNECT_CMD)
         end
     end
-    ----------------------------------------------------------------------------
 
-    ----------------------------------------------------------------------------
+
     -- Mouse Events
     this.widget:connect_signal("button::press", function(_,_,_,button)
         if (button == 1) then this._toggle() end

@@ -30,6 +30,7 @@ Plug 'rust-lang/rust.vim'
 "Themes
 Plug 'rakr/vim-one'
 Plug 'dikiaap/minimalist'
+Plug 'dylanaraps/wal.vim'
 " Plug 'ntk148v/vim-horizon'
 call plug#end()
 "}}}
@@ -38,7 +39,8 @@ call plug#end()
 set ignorecase
 set autoindent
 set incsearch
-set termguicolors
+"turn termguicolors off when using wal theme
+"set termguicolors
 "Hide <-- Insert -->Text(Bottom) because we're using linelight
 set noshowmode
 set number
@@ -49,7 +51,8 @@ set splitright
 set splitbelow
 
 syntax on
-colorscheme minimalist
+"colorscheme minimalist
+colorscheme wal
 let g:airline_theme='minimalist'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
