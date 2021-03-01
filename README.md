@@ -6,7 +6,7 @@ These are my personal dotfiles. If you want to use my setup/colors, you will hav
 * [rofi](https://github.com/davatorium/rofi)
 * [pywal](https://github.com/dylanaraps/pywal) 
 * [Variety](https://github.com/varietywalls/variety)<br>
-** Note: I slightly modified variety's setter script to work better with AwesomeWm and to generate colorschemes with pywall
+`Note: I slightly modified variety's setter script to work better with AwesomeWm and to generate colorschemes with pywall`
 
 
 ## Additional setup information:
