@@ -1,8 +1,8 @@
 # Personal dotfiles
-These are my personal dotfiles. If you want to use my setup/colors, you're on your own :P
+These are my personal dotfiles. If you want to use my setup/colors, you're on your own :P<br>
 Quicknote: I have 2 monitors, both with a resolution of 2560x1440. I'm guessing the themes will look terrible on anything below that resolution.
 
-##My ''default'' programs:
+## My ''default'' programs:
 * [AwesomeWM(git)](https://awesomewm.org)
 * [kitty](https://sw.kovidgoyal.net/kitty/)
 * [fish](http://fishshell.com/)
@@ -18,7 +18,7 @@ Quicknote: I have 2 monitors, both with a resolution of 2560x1440. I'm guessing 
 * Iosevka (Used in Kitty as terminal font)
 ##### Theme: RPG
 * Terminus (Used in Theme 'rpg' as default font)
-* Any Nerd Font patched Font for the glyphs(Adjust `icon_font` in `awesome/themes/rpg/theme.lua` accordingly)
+* Any Nerd Font patched Font for the glyphs (Adjust `icon_font` in `awesome/themes/rpg/theme.lua` accordingly)
 
 ##### Theme: Variety
 * Intern (Used in Theme 'variety' as default font)
