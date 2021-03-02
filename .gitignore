@@ -1,7 +1,7 @@
 # ignore everything... #
 /*
 /.**
-!.config/
+!/.config/
 
 # ... except for ...
 # files
@@ -12,36 +12,51 @@
 # directories
 !/.config/awesome/
 !/.config/awesome/**
-#!/.config/awesome/themes/
-!/.config/awesome/themes/variety/
-!/.config/awesome/themes/variety/**
-!/.config/awesome/themes/rpg/
-!/.config/awesome/themes/rpg/**
 /.config/awesome/themes/horizon/
+
 !/.doom.d/
-!/.config/doom/**
+!/.doom.d/**
+
 !/.config/fish
 !/.config/fish/**
+
 !/.config/kitty/
 !/.config/kitty/**
+
+!/.config/mpv/
+!/.config/mpv/**
+
 !/.config/ncmpcpp/
 !/.config/ncmpcpp/**
 /.config/ncmpcpp/lyrics
+
 !/.config/nvim/
 !/.config/nvim/**
+
 !/.config/picom/
 !/.config/picom/**
+
+!/.config/qutebrowser/
+!/.config/qutebrowser/**
+/.config/qutebrowser/bookmarks/
+/.config/qutebrowser/quickmarks
+
+!/.config/ranger/
+!/.config/ranger/**
+/.config/ranger/plugins
+/.config/ranger/commands_old.py
+/.config/ranger/rc.conf.save
+
 !/.config/wal/
 !/.config/wal/**
-!/.config/ranger/commands.py
-/.config/ranger/plugins/**
 
-# not ignore #
+# don't ignore #
 !/README.md
 !/LICENSE
 !.gitignore
 !.gitkeep
 !.gitmodules
+
 #ignore filetypes
 *~
 *_bk*
