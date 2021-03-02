@@ -3,17 +3,22 @@
 /.**
 !.config/
 
-## ... except for these files/folder
+# ... except for ...
+# files
 !/.Xresources
 !/.zshrc
+!/.config/starship.toml
+
+# directories
 !/.config/awesome/
 !/.config/awesome/**
-/.config/awesome/themes/
+#!/.config/awesome/themes/
 !/.config/awesome/themes/variety/
 !/.config/awesome/themes/variety/**
 !/.config/awesome/themes/rpg/
 !/.config/awesome/themes/rpg/**
-!/.config/doom/
+/.config/awesome/themes/horizon/
+!/.doom.d/
 !/.config/doom/**
 !/.config/fish
 !/.config/fish/**
@@ -28,6 +33,8 @@
 !/.config/picom/**
 !/.config/wal/
 !/.config/wal/**
+!/.config/ranger/commands.py
+/.config/ranger/plugins/**
 
 # not ignore #
 !/README.md
@@ -42,3 +49,4 @@
 *.netrwhist
 *.log
 *.db
+*.pyc
