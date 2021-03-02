@@ -12,6 +12,10 @@
 # directories
 !/.config/awesome/
 !/.config/awesome/**
+/.config/awesome/rc.lua.template
+/.config/awesome/*.rst
+/.config/awesome/*.md
+/.config/awesome/awesomewm-colors.lua
 /.config/awesome/themes/horizon/
 
 !/.doom.d/

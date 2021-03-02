@@ -1,9 +1,7 @@
 local dpi   = require("beautiful.xresources").apply_dpi
-local pywal = require("awesomewm-colors")
-
 
 local theme                                     = {}
-theme.accent     				= pywal.color3
+theme.accent     				= "#79838D"
 theme.dir                                       = os.getenv("HOME") .. "/.config/awesome/themes/rpg"
 theme.wallpaper                                 = os.getenv("HOME") .. "/.config/awesome/wallpaper.jpg"
 theme.font                                      = "Terminus 12"
@@ -29,7 +27,7 @@ theme.notification_border_color                 = theme.accent
 theme.notification_border_width                 = dpi(2)
 theme.notification_width                        = dpi(325)
 theme.taglist_fg_focus                          = theme.accent
-theme.taglist_fg_occupied 			= pywal.color2
+theme.taglist_fg_occupied 			= "#6C7885" 
 theme.taglist_bg_focus                          = "#00000000"
 theme.taglist_bg_occupied 			= "#00000000"
 theme.taglist_spacing 				= dpi(0)
