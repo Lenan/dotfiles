@@ -110,7 +110,7 @@ function On_screen_connect(s)
     }
 
     -- -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = beautiful.bar_height, bg = beautiful.bg_normal, fg = beautiful.fg_normal })
+    s.mywibox = awful.wibar({ type='dock', position = "top", screen = s, height = beautiful.bar_height, bg = beautiful.bg_normal, fg = beautiful.fg_normal })
 
     -- Add widgets to the wibox
     s.mywibox:setup {

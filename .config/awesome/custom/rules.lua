@@ -93,7 +93,7 @@ ruled.client.append_rules ({
     -- Rules for Steam
     { rule_any = { name = { "Steam" } },
 --      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } -- Nerd Font
-      properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
+      properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
     },
 
     { rule_any = { name = { "Steam Controller Configuration" } },
