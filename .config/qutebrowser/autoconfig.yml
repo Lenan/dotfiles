@@ -40,11 +40,16 @@ settings:
   content.notifications:
     https://aniwatch.me: false
     https://www.netflix.com: false
+    https://www.reddit.com: false
     https://www.youtube.com: false
   downloads.location.directory:
     global: ~/Downloads
+  downloads.location.prompt:
+    global: false
   downloads.position:
     global: bottom
+  downloads.remove_finished:
+    global: 5000
   fileselect.multiple_files.command:
     global:
     - kitty
@@ -107,3 +112,4 @@ settings:
       DEFAULT: https://duckduckgo.com/?q={}
       aur: https://aur.archlinux.org/packages/?O=0&K={}
       aw: https://wiki.archlinux.org/index.php?search={}
+      pdb: https://www.protondb.com/search?q={}
