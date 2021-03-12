@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export MANPAGER:nvim\x20\x2bMan\x21
+SETUVAR --export FZF_DEFAULT_COMMAND:rg\x20\x2d\x2dhidden\x20\x2d\x2dno\x2dignore\x20\x2d\x2dfiles\x20\x2dg\x20\x21go/\x20\x2dg\x21\x2ecache\x20\x2dg\x20\x21Games/
+SETUVAR --export MANPAGER:sh\x20\x2dc\x20\x27col\x20\x2dbx\x20\x7c\x20bat\x20\x2dl\x20man\x20\x2dp\x27
 SETUVAR --export RANGER_LOAD_DEFAULT_RC:false
 SETUVAR __fish_initialized:3100
 SETUVAR fish_color_autosuggestion:555\x1ebrblack

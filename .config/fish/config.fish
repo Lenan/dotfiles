@@ -296,4 +296,5 @@ end
 
 # Starship prompt
 starship init fish | source
+# cd to dir on ranger exit
 bind \co ranger-cd
