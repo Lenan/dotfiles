@@ -2,62 +2,104 @@
 call plug#begin(stdpath('data') . '/plugged')
 " Startpage
 Plug 'mhinz/vim-startify'
-"Plug 'kevinoid/vim-jsonc'
 
 "File Browsing
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kevinhwang91/rnvimr'
 
+"Plug 'scrooloose/nerdTree'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/nerdfont.vim'
+Plug 'lambdalisue/fern-renderer-nerdfont.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'lambdalisue/glyph-palette.vim'
+
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" File Browser
-Plug 'scrooloose/nerdTree'
-Plug 'ryanoasis/vim-devicons'
-"
+" Text Editing/Formatting/Aligning
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-surround'
+
+" Navigation
+Plug 'easymotion/vim-easymotion'
+
 " Status Line
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-" Keybind mini buffer
+" Gutter
+Plug 'airblade/vim-gitgutter'
+
+" Key preview mini buffer
 Plug 'liuchengxu/vim-which-key'
 
 " Languages
 Plug 'rust-lang/rust.vim'
 
+"Color Preview
+Plug 'https://github.com/ap/vim-css-color'
+
 "Themes
 Plug 'rakr/vim-one'
 Plug 'dikiaap/minimalist'
 Plug 'dylanaraps/wal.vim'
+Plug 'tomasiser/vim-code-dark'
 " Plug 'ntk148v/vim-horizon'
+
+"Misc
+Plug 'moll/vim-bbye'
+
 call plug#end()
 "}}}
 
 "{{{ Options 
 set ignorecase
+set smartcase
 set autoindent
 set incsearch
+set nohlsearch
+
 "turn termguicolors off when using wal theme
-"set termguicolors
+set termguicolors
 "Hide <-- Insert -->Text(Bottom) because we're using linelight
-set noshowmode
+"set noshowmode
 set number
 set relativenumber
 set foldmethod=marker
 set nowrap
+set updatetime=300
+set timeoutlen=100
+
 set splitright
 set splitbelow
 
+set scrolloff=5
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 syntax on
-"colorscheme minimalist
-colorscheme wal
-let g:airline_theme='minimalist'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+filetype plugin indent on
 
 let mapleader = "\<Space>"
+
+"colorscheme minimalist
+"colorscheme wal
+colorscheme codedark
+"let g:airline_theme='minimalist'
+let g:airline_theme = 'codedark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 function! CustomFoldText()
 	let line= getline(v:foldstart)
@@ -69,36 +111,18 @@ endfunction
 set foldtext=CustomFoldText()
 "}}}
 
-" {{{ Import plugin configs
-source $HOME/.config/nvim/plug-conf/nerdtree.vim
+"{{{ Import keybinds
+source $HOME/.config/nvim/keybinds.vim
+"}}}
+
+"{{{ Import plugin configs
+"source $HOME/.config/nvim/plug-conf/nerdtree.vim
+source $HOME/.config/nvim/plug-conf/fern.vim
 source $HOME/.config/nvim/plug-conf/fzf.vim
 source $HOME/.config/nvim/plug-conf/coc.vim
 source $HOME/.config/nvim/plug-conf/rnvimr.vim
+source $HOME/.config/nvim/plug-conf/easy-align.vim
+source $HOME/.config/nvim/plug-conf/easymotion.vim
 source $HOME/.config/nvim/plug-conf/which-key.vim
-" }}}
+"}}}
 
-"{{{ Custom Keybinds
-" Move a line up or down
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv"
-" Move between open 'windows'
-map <leader>wh :wincmd h<CR>
-map <leader>wj :wincmd j<CR>
-map <leader>wk :wincmd k<CR>
-map <leader>wl :wincmd l<CR>
-" Other
-map <leader>fs :w<CR>
-map <leader>fq :wq<CR>
-map <leader>ff :Files<CR>
-map <leader>fr :RnvimrToggle<CR>
-map <leader>qq :q<CR>
-map <leader>qd :q!<CR>
-map <leader>bl :bnext<CR>
-map <leader>bh :bprevious<CR>
-map <leader>bb :Buffers<CR>
-map <leader>bd :bdelete<CR>
-" }}}

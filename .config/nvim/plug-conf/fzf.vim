@@ -21,10 +21,10 @@ let g:fzf_action = {
 
 " Default fzf layout
 " - Popup window
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+let g:fzf_layout = { 'window': { 'width': 0.95, 'height': 0.8 } }
 
 " - down / up / left / right
-" let g:fzf_layout = { 'up': '40%' }
+let g:fzf_layout = { 'up': '80%' }
 
 " - Window using a Vim command
 let g:fzf_layout = { 'window': 'enew' }
