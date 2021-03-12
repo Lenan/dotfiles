@@ -13,7 +13,6 @@ local watch     = require("awful.widget.watch")
 local spawn     = require("awful.spawn")
 local naughty   = require("naughty")
 local beautiful = require("beautiful")
-local gears     = require("gears")
 local lain      = require("lain")
 local markup    = lain.util.markup
 

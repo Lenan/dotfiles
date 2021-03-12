@@ -6,13 +6,14 @@ local lain  = require("lain")
 local dpi   = require("beautiful.xresources").apply_dpi
 
 local markup = lain.util.markup
+local awesome, mouse = awesome, mouse
 
 local powermenu = {}
 powermenu.message = wibox.widget.textbox("")
 powermenu.message:set_markup(markup.font(beautiful.font, markup(beautiful.fg_normal, markup.bold("Goodbye"))))
 
 powermenu.logout = wibox.widget.textbox("")
-powermenu.logout:buttons(awful.util.table.join(awful.button({},1,function() os.execute("mpc stop;") awesome.quit() end)))
+powermenu.logout:buttons(awful.util.table.join(awful.button({},1,function() os.execute("mpc stop;"); awesome.quit() end)))
 powermenu.logout:set_markup(
 	markup.font(beautiful.icon_font, markup(beautiful.fg_normal, " "))
 	..
@@ -44,7 +45,6 @@ powermenu.popup = awful.popup{
     bg = beautiful.accent,
     shape= gears.shape.rectangle,
     border_width=0,
-    offset = {y=0 , x=0},
     widget={
         {
             powermenu.message,
@@ -54,12 +54,14 @@ powermenu.popup = awful.popup{
             layout = wibox.layout.fixed.vertical
         },
         widget = wibox.container.margin,
-        margins = dpi(10),
-	top = dpi(6),
-	bottom = dpi(6),
+        left = dpi(6),
+        right = dpi(6),
+        top = dpi(2),
+        bottom = dpi(6),
     }
 }
-powermenu.popup:connect_signal("mouse::leave",function(c) powermenu.popup.visible = false end)
+
+powermenu.popup:connect_signal("mouse::leave",function() powermenu.popup.visible = false end)
 
 powermenu.menu = wibox.widget.textbox ("Powermenu")
 powermenu.menu:set_markup(markup.font(beautiful.icon_font, markup(beautiful.icon_accent, "拉 ")))
@@ -68,13 +70,14 @@ powermenu.menu:set_markup(markup.font(beautiful.icon_font, markup(beautiful.icon
 powermenu.menu:buttons(
     gears.table.join(
         awful.button({},1,nil,function()
-                if powermenu.popup.visible then
-                    powermenu.popup.visible = not powermenu.popup.visible
-                else
-                    powermenu.popup:move_next_to(mouse.current_widget_geometry)
-                    powermenu.popup.visible = true
-                end
+            if powermenu.popup.visible then
+                powermenu.popup.visible = not powermenu.popup.visible
+            else
+                powermenu.popup:move_next_to(mouse.current_widget_geometry)
+                powermenu.popup.visible = true
+            end
         end)
-))
+    )
+)
 
 return powermenu.menu

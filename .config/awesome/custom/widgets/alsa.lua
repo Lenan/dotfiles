@@ -6,17 +6,16 @@ local markup = lain.util.markup
 
 local alsa = lain.widget.alsa({
     settings = function()
-        header = beautiful.vol_icon
-        if volume_now.status == "off" then
-            v = "off"
-        else
+        local header = beautiful.vol_icon
+        local v = "off"
+        if volume_now.status ~= "off" then
             v = volume_now.level .. "% "
         end
         widget:set_markup(
-		markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
-		.. 
-		markup.font(beautiful.font, markup(beautiful.fg_normal, v))
-	)
+            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            ..
+            markup.font(beautiful.font, markup(beautiful.fg_normal, v))
+        )
     end
 })
 alsa.widget:buttons(awful.util.table.join(

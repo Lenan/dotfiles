@@ -9,12 +9,12 @@ local gpu = awful.widget.watch(
     'bash -c "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader | tr -d [:blank:]"',
     1,
     function(widget, stdout)
-        header = beautiful.gpu_icon
+        local header = beautiful.gpu_icon
         widget:set_markup(
-		markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
-		..
-		markup.font(beautiful.font, markup(beautiful.fg_normal," ".. stdout .. "%"))
-	)
+            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            ..
+            markup.font(beautiful.font, markup(beautiful.fg_normal," ".. stdout .. "%"))
+        )
     end
 )
 gpu:buttons (

@@ -6,33 +6,31 @@ local apps = require("custom.apps")
 local markup = lain.util.markup
 
 local mpd = lain.widget.mpd({
-        notify = "off",
-        settings = function()
-            local header = beautiful.music_icon
-            local status = ""
-            local artist = " " .. mpd_now.artist .. " "
-            local title  = mpd_now.title
-            local sep = "- "
+    notify = "off",
+    settings = function()
+        local header = beautiful.music_icon
+        local status = ""
+        local artist = " " .. mpd_now.artist .. " "
+        local title  = mpd_now.title
+        local sep = "- "
 
-            if mpd_now.state == "pause" then
-                status = " "
-            elseif mpd_now.state == "stop" then
-                header = ""
-                artist = ""
-                title  = ""
-                sep = ""
-            end
+        if mpd_now.state == "pause" then
+            status = " "
+        elseif mpd_now.state == "stop" then
+            header = ""
+            artist = ""
+            title  = ""
+            sep = ""
+        end
 
         widget:set_markup(
-		markup.font(beautiful.icon_font, markup(beautiful.icon_accent, status))
-		..
-		markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
-		..
-		markup.font(beautiful.font, markup(beautiful.fg_normal,artist .. sep .. title))
-	)
-
-
-end
+            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, status))
+            ..
+            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            ..
+            markup.font(beautiful.font, markup(beautiful.fg_normal,artist .. sep .. title))
+        )
+    end
 })
 
 mpd.widget:buttons(
@@ -52,6 +50,7 @@ mpd.widget:buttons(
         awful.button({"Shift"},3, function () -- shift + right click
             os.execute("mpc prev")
         end)
-))
+    )
+)
 
 return mpd

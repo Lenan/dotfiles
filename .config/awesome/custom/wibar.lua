@@ -20,33 +20,39 @@ local mpd = require("custom.widgets.mpd")
 local powermenu_alt = require("custom.widgets.powermenu-alt")
 
 function On_screen_connect(s)
+    -- Systray workaround:
+    -- Problem: The systray can only be on one screen but the widget would still get drawn with its margins, but without any icons.
+    -- Solution: By assigning it to a local(to the screen) variable, we avoid rendering an empty widget, and with it, the default margins
+    if s.index == 1 then
+        s.systray = systray
+    end
 
     -- Tags
-     s.mytaglist = awful.widget.taglist {
-         screen = s,
-         filter = awful.widget.taglist.filter.all,
-         buttons = keys.taglist,
-         layout = {
-             layout = wibox.layout.fixed.horizontal
-         },
-         widget_template = {
-		{
-			{
-			     {
-				forced_width = dpi(12),
-				id = 'text_role',
-				widget = wibox.widget.textbox,
-			     },
-			     layout = wibox.layout.flex.horizontal,
-		     },
-		     left = dpi(2),
-		     right = dpi(2),
-		     widget = wibox.container.margin,
-		},
-		id = 'background_role',
-		widget = wibox.container.background
-	 }
-      }
+    s.mytaglist = awful.widget.taglist {
+        screen = s,
+        filter = awful.widget.taglist.filter.all,
+        buttons = keys.taglist,
+        layout = {
+            layout = wibox.layout.fixed.horizontal
+        },
+        widget_template = {
+            {
+                {
+                    {
+                        forced_width = dpi(12),
+                        id = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    layout = wibox.layout.align.horizontal,
+                },
+                left = beautiful.taglist_margin_left or dpi(2),
+                right = beautiful.taglist_margin_right or dpi(2),
+                widget = wibox.container.margin,
+            },
+            id = 'background_role',
+            widget = wibox.container.background
+        }
+    }
 
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
@@ -83,33 +89,31 @@ function On_screen_connect(s)
                     {
                         forced_height = dpi(3),
                         id = 'background_role',
-			shape = gears.shape.rounded_bar,
                         widget = wibox.container.background,
                     },
                     {
-			{
-				{
-				    id = 'clienticon',
-				    awful.widget.clienticon,
-				    margins = dpi(5),
-				    left= dpi(0),
-				    widget = wibox.container.margin
-				},
-				{
-				    id = 'text_role',
-				    widget = wibox.widget.textbox
-				},
-				layout = wibox.layout.align.horizontal,
-			},
-			right = dpi(5),
-			left = dpi(5),
-			widget = wibox.container.margin,
+                        {
+                            {
+                                id = 'clienticon',
+                                awful.widget.clienticon,
+                                margins = beautiful.tasklist_icon_margins or dpi(5),
+                                widget = wibox.container.margin
+                            },
+                            {
+                                id = 'text_role',
+                                widget = wibox.widget.textbox
+                            },
+                            layout = wibox.layout.align.horizontal,
+                        },
+                        right = beautiful.tasklist_item_margins_right or dpi(5),
+                        left = beautiful.tasklist_item_margins_left or dpi(5),
+                        widget = wibox.container.margin,
                     },
                     layout = wibox.layout.align.vertical,
         }
     }
 
-    -- -- Create the wibox
+    -- Create the wibox
     s.mywibox = awful.wibar({ type='dock', position = "top", screen = s, height = beautiful.bar_height, bg = beautiful.bg_normal, fg = beautiful.fg_normal })
 
     -- Add widgets to the wibox
@@ -128,18 +132,18 @@ function On_screen_connect(s)
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-	    spacing = beautiful.widget_spacing,
-	    --pulse,
-	    mpd,
-	    pipewire,
-	    cpu,
-	    gpu,
-	    ram,
-	    vpn,
-	    clock,
-	    systray,
-	    --powermenu,
-	    powermenu_alt,
+            spacing = beautiful.widget_spacing,
+            --pulse,
+            mpd,
+            pipewire,
+            cpu,
+            gpu,
+            ram,
+            vpn,
+            clock,
+            s.systray,
+            --powermenu,
+            powermenu_alt,
         },
     }
 end

@@ -37,7 +37,7 @@ ruled.client.append_rules ({
 
     -- Titlebars
     { rule_any = { type = { "dialog", "normal" } },
-        properties = { titlebars_enabled = false } 
+        properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the first tag on screen 1.
@@ -82,7 +82,7 @@ ruled.client.append_rules ({
 
     -- Star Wars Battlefront 2 (2017)
     { rule_any = { class = { "starwarsbattlefrontii.exe" } },
-      properties = { floating = true } 
+      properties = { floating = true }
     },
 
     { rule_any = { name = { "Lutris" } },
@@ -107,6 +107,9 @@ ruled.client.append_rules ({
     -- Rule for Factorio
     { rule_any = { name = {  "Factorio .*"} },
       properties = { floating = true, maximized = true, fullscreen = true}
+    },
+    { rule_any = { class = { "steam_app_.*" } },
+      properties = { maximized = true, fullscreen = true }
     },
 
     -- Rule for Teamspeak

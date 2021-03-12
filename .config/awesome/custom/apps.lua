@@ -2,11 +2,15 @@ local apps = {
   terminal = "kitty",
   musicplayer = "ncmpcpp",
   volcontrol = "pavucontrol",
-  sysmonitor = "gotop",
+  sysmonitor = "bpytop",
   gpumonitor = "gew",
-  browser = os.getenv("BROWSER") or "firefox",
-  browser2 = "qutebrowser",
+  term_filebrowser = "ranger",
+  browser = "qutebrowser",
+  browser2 = os.getenv("BROWSER") or "firefox",
   editor = os.getenv("EDITOR") or "nvim",
-  gui_editor = os.getenv("EDITOR") or "emacs"
+  gui_editor = os.getenv("EDITOR") or "emacs",
+  voicechat = "teamspeak3",
+  gamelib = "steam",
+  pwmanager = "bwmenu"
 }
 return apps

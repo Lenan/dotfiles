@@ -8,16 +8,16 @@ local markup = lain.util.markup
 local pulse = lain.widget.pulse({
     --togglechannel = "IEC958,3",
     settings = function()
-        header = beautiful.vol_icon
-        vlevel = volume_now.left .. "% "
+        local header = beautiful.vol_icon
+        local v = volume_now.left .. "% "
         if volume_now.muted == "yes" then
-            vlevel = vlevel .. " M"
+            v = v .. " M"
         end
         widget:set_markup(
-		markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
-		..
-		markup.font(beautiful.font, markup(beautiful.fg_normal, vlevel))
-	)
+            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            ..
+            markup.font(beautiful.font, markup(beautiful.fg_normal, v))
+        )
     end
 })
 pulse.widget:buttons(

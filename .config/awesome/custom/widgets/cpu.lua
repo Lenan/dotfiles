@@ -1,5 +1,4 @@
 local awful = require("awful")
-local wibox = require("wibox")
 local beautiful = require("beautiful")
 local lain = require("lain")
 local apps = require("custom.apps")
@@ -8,13 +7,13 @@ local markup = lain.util.markup
 
 local cpu = lain.widget.cpu({
     settings = function()
-      header = beautiful.cpu_icon
+      local header = beautiful.cpu_icon
       widget:set_markup(
-      markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header ))
-      ..
-      markup.font(beautiful.font, markup(beautiful.fg_normal, " " ..cpu_now.usage .. "%"))
+          markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header ))
+          ..
+          markup.font(beautiful.font, markup(beautiful.fg_normal, " " ..cpu_now.usage .. "%"))
       )
-      end
+    end
 })
 
 cpu.widget:buttons(

@@ -1,8 +1,6 @@
--- {{{ Required libraries
 local awful         = require("awful")
 require("awful.autofocus")
 local beautiful     = require("beautiful")
--- }}}
 
 -- autostart desired programs
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
@@ -15,7 +13,8 @@ require("custom.errorhandling")
 local themes = {
     "variety",          -- 1
     "horizon",          -- 2
-    "rpg", 		-- 3
+    "rpg", 		        -- 3
+    "kanji",            -- 4
 }
 
 local chosen_theme = themes[3]
