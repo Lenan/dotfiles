@@ -1,0 +1,23 @@
+background #1c1e26
+foreground #eeeeee
+color0 #2e303e
+color1 #59e3e3
+color2 #29d398
+color3 #fab795
+color4 #e95678
+color5 #26bbd9
+color6 #ee64ae
+color7 #29d398
+color8 #2e303e
+color9 #59e3e3
+color10 #29d398
+color11 #fab795
+color12 #e95678
+color13 #26bbd9
+color14 #ee64ae
+color15 #29d398
+
+active_border_color #29d398
+bell_border_color #e95678
+url_color #fab795
+selection_background #ee64ae
