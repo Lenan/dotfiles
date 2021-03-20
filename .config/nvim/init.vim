@@ -89,7 +89,7 @@ filetype plugin indent on
 "colorscheme codedark
 colorscheme xresources
 "use this with xresources theme
-"highlight Folded ctermfg=gray guifg=gray
+highlight Folded ctermfg=gray guifg=gray
 let g:lightline = { 'colorscheme' : 'powerlineish' }
 
 function! CustomFoldText()
