@@ -24,9 +24,9 @@ local mpd = lain.widget.mpd({
         end
 
         widget:set_markup(
-            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, status))
+            markup.font(beautiful.icon_font, markup(beautiful.music_icon_color, status))
             ..
-            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            markup.font(beautiful.icon_font, markup(beautiful.music_icon_color, header))
             ..
             markup.font(beautiful.font, markup(beautiful.fg_normal,artist .. sep .. title))
         )

@@ -64,7 +64,7 @@ powermenu.popup = awful.popup{
 powermenu.popup:connect_signal("mouse::leave",function() powermenu.popup.visible = false end)
 
 powermenu.menu = wibox.widget.textbox ("Powermenu")
-powermenu.menu:set_markup(markup.font(beautiful.icon_font, markup(beautiful.icon_accent, "拉 ")))
+powermenu.menu:set_markup(markup.font(beautiful.icon_font, markup(beautiful.music_icon_color, "拉 ")))
 
 
 powermenu.menu:buttons(

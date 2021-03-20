@@ -44,7 +44,7 @@ local function update_status(vpn_conn_obj, stdout, _, _, _)
 
     vpn_conn_obj.last_stdout = stdout;
     if is_connected then
-        vpn_conn_obj.widget:set_markup(markup.font(beautiful.icon_font, markup(beautiful.icon_accent, CONNECTED_GLYPH)))
+        vpn_conn_obj.widget:set_markup(markup.font(beautiful.icon_font, markup(beautiful.vpn_icon_color, CONNECTED_GLYPH)))
     else
         vpn_conn_obj.widget:set_markup(markup.font(beautiful.icon_font, markup(beautiful.fg_normal, DISCONNECTED_GLYPH)))
     end

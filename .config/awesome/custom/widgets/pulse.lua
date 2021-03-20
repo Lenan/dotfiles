@@ -14,7 +14,7 @@ local pulse = lain.widget.pulse({
             v = v .. " M"
         end
         widget:set_markup(
-            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            markup.font(beautiful.icon_font, markup(beautiful.vol_icon_color, header))
             ..
             markup.font(beautiful.font, markup(beautiful.fg_normal, v))
         )

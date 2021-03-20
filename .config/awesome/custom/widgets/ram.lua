@@ -9,7 +9,7 @@ local mem = lain.widget.mem({
     settings = function()
         local header = beautiful.ram_icon
         widget:set_markup(
-            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            markup.font(beautiful.icon_font, markup(beautiful.ram_icon_color, header))
             ..
             markup.font(beautiful.font, markup(beautiful.fg_normal," ".. mem_now.used .. "MB"))
         )

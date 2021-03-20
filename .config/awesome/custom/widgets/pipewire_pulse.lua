@@ -11,7 +11,7 @@ local pipewire_pulse = awful.widget.watch(
     function(widget, stdout)
         local header = beautiful.vol_icon
         widget:set_markup(
-            markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header))
+            markup.font(beautiful.icon_font, markup(beautiful.vol_icon_color, header))
             ..
             markup.font(beautiful.font,markup(beautiful.fg_normal," ".. stdout))
         )

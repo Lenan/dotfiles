@@ -14,10 +14,9 @@ local themes = {
     "variety",          -- 1
     "horizon",          -- 2
     "rpg", 		        -- 3
-    "kanji",            -- 4
 }
 
-local chosen_theme = themes[3]
+local chosen_theme = themes[2]
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
 

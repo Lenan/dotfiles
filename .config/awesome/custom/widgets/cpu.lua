@@ -9,7 +9,7 @@ local cpu = lain.widget.cpu({
     settings = function()
       local header = beautiful.cpu_icon
       widget:set_markup(
-          markup.font(beautiful.icon_font, markup(beautiful.icon_accent, header ))
+          markup.font(beautiful.icon_font, markup(beautiful.cpu_icon_color, header ))
           ..
           markup.font(beautiful.font, markup(beautiful.fg_normal, " " ..cpu_now.usage .. "%"))
       )

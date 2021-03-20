@@ -15,15 +15,15 @@ powermenu.message:set_markup(markup.font(beautiful.font, markup(beautiful.fg_nor
 
 powermenu.logout = wibox.widget.textbox("Logout")
 powermenu.logout:buttons(awful.util.table.join(awful.button({},1,function() os.execute("mpc stop;") awesome.quit() end)))
-powermenu.logout:set_markup(markup.font(beautiful.font, markup(beautiful.icon_accent, "  ") .. markup(beautiful.fg_normal, "Logout ")))
+powermenu.logout:set_markup(markup.font(beautiful.font, markup(beautiful.music_icon_color, "  ") .. markup(beautiful.fg_normal, "Logout ")))
 
 powermenu.reboot = wibox.widget.textbox("Reboot")
 powermenu.reboot:buttons(awful.util.table.join(awful.button({},1,function() os.execute("mpc stop; reboot") end)))
-powermenu.reboot:set_markup(markup.font(beautiful.font, markup(beautiful.icon_accent, " ".. markup(beautiful.fg_normal, "Reboot "))))
+powermenu.reboot:set_markup(markup.font(beautiful.font, markup(beautiful.music_icon_color, " ".. markup(beautiful.fg_normal, "Reboot "))))
 
 powermenu.shutdown = wibox.widget.textbox("Shutdown")
 powermenu.shutdown:buttons(awful.util.table.join(awful.button({},1,function() os.execute("mpc stop; poweroff") end)))
-powermenu.shutdown:set_markup(markup.font(beautiful.font, markup(beautiful.icon_accent, " ".. markup(beautiful.fg_normal, "Poweroff "))))
+powermenu.shutdown:set_markup(markup.font(beautiful.font, markup(beautiful.music_icon_color, " ".. markup(beautiful.fg_normal, "Poweroff "))))
 
 powermenu.popup = awful.popup {
     visible = false,
@@ -53,7 +53,7 @@ powermenu.popup = awful.popup {
 powermenu.popup:connect_signal("mouse::leave",function() powermenu.popup.visible = false end)
 
 powermenu.menu = wibox.widget.textbox ("Powermenu")
-powermenu.menu:set_markup(markup.font(beautiful.icon_font, markup(beautiful.icon_accent, "拉")))
+powermenu.menu:set_markup(markup.font(beautiful.icon_font, markup(beautiful.music_icon_color, "拉")))
 powermenu.menu.valign = "center"
 powermenu.menu:buttons(
     gears.table.join(
