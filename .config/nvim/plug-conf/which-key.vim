@@ -27,6 +27,7 @@ let g:which_key_map.f.r = 'browse files (ranger)'
 let g:which_key_map.q   = { 'name' : '+quit' }
 let g:which_key_map.q.q = 'quit'
 let g:which_key_map.q.d = 'force quit'
+let g:which_key_map.q.c = 'close console'
 
 let g:which_key_map.w   = { 'name' : '+windows' }
 let g:which_key_map.w.h = 'move to left window'
@@ -35,13 +36,20 @@ let g:which_key_map.w.k = 'move to up window'
 let g:which_key_map.w.l = 'move to right window'
 let g:which_key_map.w.b = 'browse windows'
 
-let g:which_key_map.c   = { 'name' : '+coc'}
+let g:which_key_map.p = { 'name' : '+sessions' }
+let g:which_key_map.p.b = 'open overview'
+let g:which_key_map.p.s = 'save session'
+let g:which_key_map.p.o = 'load session'
+let g:which_key_map.p.d = 'close session'
+let g:which_key_map.p.x = 'delete session'
 
-let g:which_key_map.n   = { 'name' : 'project drawer' }
-let g:which_key_map.n.t = 'toggle project drawer'
+let g:which_key_map.n   = { 'name' : '+projects' }
+let g:which_key_map.n.t = 'toggle project tree'
+let g:which_key_map.n.f = 'focus project tree'
 
-let g:which_key_map.p   = { 'name' : '+prettify'}
-let g:which_key_map.p.a = 'easy align (selection needed)'
+let g:which_key_map.c   = { 'name' : '+code'}
+let g:which_key_map.c.a = 'easy align (selection needed)'
+let g:which_key_map.c.f = 'format'
 
 let g:which_key_map.e   = { 'name' : '+easymotion' }
 let g:which_key_map.e.w = 'move to word (local)'

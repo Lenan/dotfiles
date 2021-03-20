@@ -3,36 +3,32 @@ call plug#begin(stdpath('data') . '/plugged')
 " Startpage
 Plug 'mhinz/vim-startify'
 
-"File Browsing
+"File Navigation
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kevinhwang91/rnvimr'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-media-files.nvim'
 
-"Plug 'scrooloose/nerdTree'
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'easymotion/vim-easymotion'
+Plug 'romgrk/barbar.nvim'
 
-Plug 'lambdalisue/fern.vim'
-Plug 'lambdalisue/nerdfont.vim'
-Plug 'lambdalisue/fern-renderer-nerdfont.vim'
-Plug 'lambdalisue/fern-git-status.vim'
-Plug 'lambdalisue/glyph-palette.vim'
+" Intellisense
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 
-" Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Text Editing/Formatting/Aligning
+" Text Editing/Formatting/Aligning/Highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-surround'
-
-" Navigation
-Plug 'easymotion/vim-easymotion'
+Plug 'frazrepo/vim-rainbow'
 
 " Status Line
-" Plug 'itchyny/lightline.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 " Gutter
 Plug 'airblade/vim-gitgutter'
@@ -44,14 +40,13 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'rust-lang/rust.vim'
 
 "Color Preview
-Plug 'https://github.com/ap/vim-css-color'
+Plug 'norcalli/nvim-colorizer.lua'
 
 "Themes
 Plug 'rakr/vim-one'
 Plug 'dikiaap/minimalist'
-Plug 'dylanaraps/wal.vim'
 Plug 'tomasiser/vim-code-dark'
-" Plug 'ntk148v/vim-horizon'
+Plug 'nekonako/xresources-nvim'
 
 "Misc
 Plug 'moll/vim-bbye'
@@ -69,7 +64,7 @@ set nohlsearch
 "turn termguicolors off when using wal theme
 set termguicolors
 "Hide <-- Insert -->Text(Bottom) because we're using linelight
-"set noshowmode
+set noshowmode
 set number
 set relativenumber
 set foldmethod=marker
@@ -91,15 +86,11 @@ set fillchars=fold:\ ,vert:\│,eob:\ ,msgsep:‾
 syntax on
 filetype plugin indent on
 
-let mapleader = "\<Space>"
-
-"colorscheme minimalist
-"colorscheme wal
-colorscheme codedark
-"let g:airline_theme='minimalist'
-let g:airline_theme = 'codedark'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
+"colorscheme codedark
+colorscheme xresources
+"use this with xresources theme
+"highlight Folded ctermfg=gray guifg=gray
+let g:lightline = { 'colorscheme' : 'powerlineish' }
 
 function! CustomFoldText()
 	let line= getline(v:foldstart)
@@ -112,17 +103,26 @@ set foldtext=CustomFoldText()
 "}}}
 
 "{{{ Import keybinds
-source $HOME/.config/nvim/keybinds.vim
+source ~/.config/nvim/keybinds.vim
 "}}}
 
 "{{{ Import plugin configs
-"source $HOME/.config/nvim/plug-conf/nerdtree.vim
-source $HOME/.config/nvim/plug-conf/fern.vim
-source $HOME/.config/nvim/plug-conf/fzf.vim
-source $HOME/.config/nvim/plug-conf/coc.vim
-source $HOME/.config/nvim/plug-conf/rnvimr.vim
-source $HOME/.config/nvim/plug-conf/easy-align.vim
-source $HOME/.config/nvim/plug-conf/easymotion.vim
-source $HOME/.config/nvim/plug-conf/which-key.vim
+source ~/.config/nvim/plug-conf/startify.vim
+source ~/.config/nvim/plug-conf/lsp-config.vim
+source ~/.config/nvim/plug-conf/fzf.vim
+source ~/.config/nvim/plug-conf/rnvimr.vim
+source ~/.config/nvim/plug-conf/easy-align.vim
+source ~/.config/nvim/plug-conf/easymotion.vim
+source ~/.config/nvim/plug-conf/which-key.vim
+source ~/.config/nvim/plug-conf/nvim-tree.vim
+
+luafile ~/.config/nvim/lua/plug/compe.lua
+luafile ~/.config/nvim/lua/plug/telescope.lua
+luafile ~/.config/nvim/lua/plug/colorizer.lua
+luafile ~/.config/nvim/lua/plug/treesitter.lua
+"LSP
+luafile ~/.config/nvim/lua/lspconfig/rust.lua
+luafile ~/.config/nvim/lua/lspconfig/lualsp.lua
+luafile ~/.config/nvim/lua/lspconfig/python-jedi.lua
 "}}}
 
