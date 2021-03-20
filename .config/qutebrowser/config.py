@@ -11,7 +11,47 @@
 #   qute://help/settings.html
 
 # Change the argument to True to still load settings configured via autoconfig.yml
-config.load_autoconfig(True)
+config.load_autoconfig(False)
+
+# Aliases for commands. The keys of the given dictionary are the
+# aliases, while the values are the commands they map to.
+# Type: Dict
+c.aliases = {'q': 'close', 'qa': 'quit', 'w': 'session-save', 'wq': 'quit --save', 'wqa': 'quit --save'}
+
+# Backend to use to display websites. qutebrowser supports two different
+# web rendering engines / backends, QtWebEngine and QtWebKit (not
+# recommended). QtWebEngine is Qt's official successor to QtWebKit, and
+# both the default/recommended backend. It's based on a stripped-down
+# Chromium and regularly updated with security fixes and new features by
+# the Qt project: https://wiki.qt.io/QtWebEngine QtWebKit was
+# qutebrowser's original backend when the project was started. However,
+# support for QtWebKit was discontinued by the Qt project with Qt 5.6 in
+# 2016. The development of QtWebKit was picked up in an official fork:
+# https://github.com/qtwebkit/qtwebkit - however, the project seems to
+# have stalled again. The latest release (5.212.0 Alpha 4) from March
+# 2020 is based on a WebKit version from 2016, with many known security
+# vulnerabilities. Additionally, there is no process isolation and
+# sandboxing. Due to all those issues, while support for QtWebKit is
+# still available in qutebrowser for now, using it is strongly
+# discouraged.
+# Type: String
+# Valid values:
+#   - webengine: Use QtWebEngine (based on Chromium - recommended).
+#   - webkit: Use QtWebKit (based on WebKit, similar to Safari - many known security issues!).
+c.backend = 'webengine'
+
+# Always restore open sites when qutebrowser is reopened. Without this
+# option set, `:wq` (`:quit --save`) needs to be used to save open tabs
+# (and restore them), while quitting qutebrowser in any other way will
+# not save/restore the session. By default, this will save to the
+# session which was last loaded. This behavior can be customized via the
+# `session.default_name` setting.
+# Type: Bool
+c.auto_save.session = True
+
+# Automatically start playing `<video>` elements.
+# Type: Bool
+c.content.autoplay = False
 
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
@@ -46,6 +86,16 @@ config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 #   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
 #   - never: Don't accept cookies at all.
 config.set('content.cookies.accept', 'all', 'devtools://*')
+
+# Set fullscreen notification overlay timeout in milliseconds. If set to
+# 0, no overlay will be displayed.
+# Type: Int
+c.content.fullscreen.overlay_timeout = 0
+
+# Value to send in the `Accept-Language` header. Note that the value
+# read from JavaScript is always the global value.
+# Type: String
+config.set('content.headers.accept_language', '', 'https://matchmaker.krunker.io/*')
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -95,6 +145,30 @@ config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/{w
 # Type: FormatString
 config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99 Safari/537.36', 'https://*.slack.com/*')
 
+# Which method of blocking ads should be used.  Support for Adblock Plus
+# (ABP) syntax blocklists using Brave's Rust library requires the
+# `adblock` Python package to be installed, which is an optional
+# dependency of qutebrowser. It is required when either `adblock` or
+# `both` are selected.
+# Type: String
+# Valid values:
+#   - auto: Use Brave's ABP-style adblocker if available, host blocking otherwise
+#   - adblock: Use Brave's ABP-style adblocker
+#   - hosts: Use hosts blocking
+#   - both: Use both hosts blocking and Brave's ABP-style adblocker
+c.content.blocking.method = 'adblock'
+
+# List of URLs to ABP-style adblocking rulesets.  Only used when Brave's
+# ABP-style adblocker is used (see `content.blocking.method`).  You can
+# find an overview of available lists here:
+# https://adblockplus.org/en/subscriptions - note that the special
+# `subscribe.adblockplus.org` links aren't handled by qutebrowser, you
+# will instead need to find the link to the raw `.txt` file (e.g. by
+# extracting it from the `location` parameter of the subscribe URL and
+# URL-decoding it).
+# Type: List of Url
+c.content.blocking.adblock.lists = ['https://easylist.to/easylist/easylist.txt', 'https://easylist.to/easylist/easyprivacy.txt', 'https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt']
+
 # Load images automatically in web pages.
 # Type: Bool
 config.set('content.images', True, 'chrome-devtools://*')
@@ -102,6 +176,10 @@ config.set('content.images', True, 'chrome-devtools://*')
 # Load images automatically in web pages.
 # Type: Bool
 config.set('content.images', True, 'devtools://*')
+
+# Enable JavaScript.
+# Type: Bool
+config.set('content.javascript.enabled', True, 'https://store.steampowered.com/')
 
 # Enable JavaScript.
 # Type: Bool
@@ -119,6 +197,143 @@ config.set('content.javascript.enabled', True, 'chrome://*/*')
 # Type: Bool
 config.set('content.javascript.enabled', True, 'qute://*/*')
 
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', False, 'https://aniwatch.me')
+
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', False, 'https://www.netflix.com')
+
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', False, 'https://www.reddit.com')
+
+# Allow websites to show notifications.
+# Type: BoolAsk
+# Valid values:
+#   - true
+#   - false
+#   - ask
+config.set('content.notifications', False, 'https://www.youtube.com')
+
+# Execute the best-matching command on a partial match.
+# Type: Bool
+c.completion.use_best_match = True
+
+# Directory to save downloads to. If unset, a sensible OS-specific
+# default is used.
+# Type: Directory
+c.downloads.location.directory = '~/Downloads'
+
+# Prompt the user for the download location. If set to false,
+# `downloads.location.directory` will be used.
+# Type: Bool
+c.downloads.location.prompt = False
+
+# Where to show the downloaded files.
+# Type: VerticalPosition
+# Valid values:
+#   - top
+#   - bottom
+c.downloads.position = 'bottom'
+
+# Duration (in milliseconds) to wait before removing finished downloads.
+# If set to -1, downloads are never removed.
+# Type: Int
+c.downloads.remove_finished = 5000
+
+# Command (and arguments) to use for selecting a single file in forms.
+# The command should write the selected file path to the specified file
+# or stdout. The following placeholders are defined: * `{}`: Filename of
+# the file to be written to. If not contained in any argument, the
+# standard output of the command is read instead.
+# Type: ShellCommand
+c.fileselect.single_file.command = ['kitty', '-e', 'ranger', '--choosefile={}']
+
+# Command (and arguments) to use for selecting multiple files in forms.
+# The command should write the selected file paths to the specified file
+# or to stdout, separated by newlines. The following placeholders are
+# defined: * `{}`: Filename of the file to be written to. If not
+# contained in any argument, the   standard output of the command is
+# read instead.
+# Type: ShellCommand
+c.fileselect.multiple_files.command = ['kitty', '-e', 'ranger', '--choosefiles={}']
+
+# Rounding radius (in pixels) for the edges of hints.
+# Type: Int
+c.hints.radius = 1
+
+# Characters used for hint strings.
+# Type: UniqueCharString
+c.hints.chars = 'sdfjkl'
+
+# Scatter hint key chains (like Vimium) or not (like dwb). Ignored for
+# number hints.
+# Type: Bool
+c.hints.scatter = False
+
+# Make characters in hint strings uppercase.
+# Type: Bool
+c.hints.uppercase = True
+
+# Time (in milliseconds) from pressing a key to seeing the keyhint
+# dialog.
+# Type: Int
+c.keyhint.delay = 100
+
+# When to show the statusbar.
+# Type: String
+# Valid values:
+#   - always: Always show the statusbar.
+#   - never: Always hide the statusbar.
+#   - in-mode: Show the statusbar when in modes other than normal mode.
+c.statusbar.show = 'in-mode'
+
+# List of widgets displayed in the statusbar.
+# Type: List of String
+# Valid values:
+#   - url: Current page URL.
+#   - scroll: Percentage of the current page position like `10%`.
+#   - scroll_raw: Raw percentage of the current page position like `10`.
+#   - history: Display an arrow when possible to go back/forward in history.
+#   - tabs: Current active tab, e.g. `2`.
+#   - keypress: Display pressed keys when composing a vi command.
+#   - progress: Progress bar for the current page loading.
+c.statusbar.widgets = ['keypress', 'url', 'progress']
+
+# Open new tabs (middleclick/ctrl+click) in the background.
+# Type: Bool
+c.tabs.background = True
+
+# How to behave when the last tab is closed. If the
+# `tabs.tabs_are_windows` setting is set, this is ignored and the
+# behavior is always identical to the `close` value.
+# Type: String
+# Valid values:
+#   - ignore: Don't do anything.
+#   - blank: Load a blank page.
+#   - startpage: Load the start page.
+#   - default-page: Load the default page.
+#   - close: Close the window.
+c.tabs.last_close = 'ignore'
+
+# Padding (in pixels) around text for tabs.
+# Type: Padding
+c.tabs.padding = {'bottom': 2, 'left': 5, 'right': 5, 'top': 2}
+
 # Position of the tab bar.
 # Type: Position
 # Valid values:
@@ -128,9 +343,132 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #   - right
 c.tabs.position = 'left'
 
+# Which tab to select when the focused tab is removed.
+# Type: SelectOnRemove
+# Valid values:
+#   - prev: Select the tab which came before the closed one (left in horizontal, above in vertical).
+#   - next: Select the tab which came after the closed one (right in horizontal, below in vertical).
+#   - last-used: Select the previously selected tab.
+c.tabs.select_on_remove = 'prev'
+
+# When to show the tab bar.
+# Type: String
+# Valid values:
+#   - always: Always show the tab bar.
+#   - never: Always hide the tab bar.
+#   - multiple: Hide the tab bar if only one tab is open.
+#   - switching: Show the tab bar when switching tabs.
+c.tabs.show = 'multiple'
+
+# Duration (in milliseconds) to show the tab bar before hiding it when
+# tabs.show is set to 'switching'.
+# Type: Int
+c.tabs.show_switching_delay = 800
+
+# Format to use for the tab title. The following placeholders are
+# defined:  * `{perc}`: Percentage as a string like `[10%]`. *
+# `{perc_raw}`: Raw percentage, e.g. `10`. * `{current_title}`: Title of
+# the current web page. * `{title_sep}`: The string `" - "` if a title
+# is set, empty otherwise. * `{index}`: Index of this tab. *
+# `{aligned_index}`: Index of this tab padded with spaces to have the
+# same   width. * `{id}`: Internal tab ID of this tab. * `{scroll_pos}`:
+# Page scroll position. * `{host}`: Host of the current web page. *
+# `{backend}`: Either `webkit` or `webengine` * `{private}`: Indicates
+# when private mode is enabled. * `{current_url}`: URL of the current
+# web page. * `{protocol}`: Protocol (http/https/...) of the current web
+# page. * `{audio}`: Indicator for audio/mute status.
+# Type: FormatString
+c.tabs.title.format = '{private}{current_title}'
+
+# Width (in pixels or as percentage of the window) of the tab bar if
+# it's vertical.
+# Type: PercOrInt
+c.tabs.width = '10%'
+
+# Maximum width (in pixels) of tabs (-1 for no maximum). This setting
+# only applies when tabs are horizontal. This setting does not apply to
+# pinned tabs, unless `tabs.pinned.shrink` is False. This setting may
+# not apply properly if max_width is smaller than the minimum size of
+# tab contents, or smaller than tabs.min_width.
+# Type: Int
+c.tabs.max_width = -1
+
+# Width (in pixels) of the progress indicator (0 to disable).
+# Type: Int
+c.tabs.indicator.width = 0
+
+# Padding (in pixels) for tab indicators.
+# Type: Padding
+c.tabs.indicator.padding = {'bottom': 2, 'left': 0, 'right': 2, 'top': 2}
+
+# Maximum stack size to remember for tab switches (-1 for no maximum).
+# Type: Int
+c.tabs.focus_stack_size = 10
+
+# Search engines which can be used via the address bar.  Maps a search
+# engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
+# placeholder. The placeholder will be replaced by the search term, use
+# `{{` and `}}` for literal `{`/`}` braces.  The following further
+# placeholds are defined to configure how special characters in the
+# search terms are replaced by safe characters (called 'quoting'):  *
+# `{}` and `{semiquoted}` quote everything except slashes; this is the
+# most   sensible choice for almost all search engines (for the search
+# term   `slash/and&amp` this placeholder expands to `slash/and%26amp`).
+# * `{quoted}` quotes all characters (for `slash/and&amp` this
+# placeholder   expands to `slash%2Fand%26amp`). * `{unquoted}` quotes
+# nothing (for `slash/and&amp` this placeholder   expands to
+# `slash/and&amp`). * `{0}` means the same as `{}`, but can be used
+# multiple times.  The search engine named `DEFAULT` is used when
+# `url.auto_search` is turned on and something else than a URL was
+# entered to be opened. Other search engines can be used by prepending
+# the search engine name to the search term, e.g. `:open google
+# qutebrowser`.
+# Type: Dict
+c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'aur': 'https://aur.archlinux.org/packages/?O=0&K={}', 'aw': 'https://wiki.archlinux.org/index.php?search={}', 'pdb': 'https://www.protondb.com/search?q={}'}
+
+# Background color of the completion widget for odd rows.
+# Type: QssColor
+c.colors.completion.odd.bg = '#1c1e26'
+
+# Background color of the completion widget for even rows.
+# Type: QssColor
+c.colors.completion.even.bg = '#1c1e26'
+
+# Background color of the completion widget category headers.
+# Type: QssColor
+c.colors.completion.category.bg = 'qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #E95678, stop:1 #1c1e26)'
+
+# Foreground color of the selected completion item.
+# Type: QtColor
+c.colors.completion.item.selected.fg = 'white'
+
+# Background color of the selected completion item.
+# Type: QssColor
+c.colors.completion.item.selected.bg = '#E95678'
+
+# Top border color of the selected completion item.
+# Type: QssColor
+c.colors.completion.item.selected.border.top = '#E95678'
+
+# Bottom border color of the selected completion item.
+# Type: QssColor
+c.colors.completion.item.selected.border.bottom = '#E95678'
+
+# Foreground color of the matched text in the selected completion item.
+# Type: QtColor
+c.colors.completion.item.selected.match.fg = 'black'
+
+# Foreground color of the matched text in the completion.
+# Type: QtColor
+c.colors.completion.match.fg = '#E95678'
+
+# Color of the scrollbar handle in the completion view.
+# Type: QssColor
+c.colors.completion.scrollbar.fg = '#E95678'
+
 # Background color of the tab bar.
 # Type: QssColor
-c.colors.tabs.bar.bg = '#1A1C23'
+c.colors.tabs.bar.bg = '#1C1E26'
 
 # Background color of unselected odd tabs.
 # Type: QtColor
@@ -140,6 +478,137 @@ c.colors.tabs.odd.bg = '#1C1E26'
 # Type: QtColor
 c.colors.tabs.even.bg = '#1C1E26'
 
+# Background color of selected odd tabs.
+# Type: QtColor
+c.colors.tabs.selected.odd.bg = '#E95678'
+
 # Background color of selected even tabs.
 # Type: QtColor
-c.colors.tabs.selected.even.bg = '#1C1E26'
+c.colors.tabs.selected.even.bg = '#E95678'
+
+# Background color for webpages if unset (or empty to use the theme's
+# color).
+# Type: QtColor
+c.colors.webpage.bg = 'black'
+
+# Value to use for `prefers-color-scheme:` for websites. The "light"
+# value is only available with QtWebEngine 5.15.2+. On older versions,
+# it is the same as "auto". The "auto" value is broken on QtWebEngine
+# 5.15.2 due to a Qt bug. There, it will fall back to "light"
+# unconditionally.
+# Type: String
+# Valid values:
+#   - auto: Use the system-wide color scheme setting.
+#   - light: Force a light theme.
+#   - dark: Force a dark theme.
+c.colors.webpage.preferred_color_scheme = 'dark'
+
+# Render all web contents using a dark theme. Example configurations
+# from Chromium's `chrome://flags`:  - "With simple HSL/CIELAB/RGB-based
+# inversion": Set   `colors.webpage.darkmode.algorithm` accordingly.  -
+# "With selective image inversion": Set
+# `colors.webpage.darkmode.policy.images` to `smart`.  - "With selective
+# inversion of non-image elements": Set
+# `colors.webpage.darkmode.threshold.text` to 150 and
+# `colors.webpage.darkmode.threshold.background` to 205.  - "With
+# selective inversion of everything": Combines the two variants   above.
+# Type: Bool
+c.colors.webpage.darkmode.enabled = False
+
+# Which algorithm to use for modifying how colors are rendered with
+# darkmode. The `lightness-cielab` value was added with QtWebEngine 5.14
+# and is treated like `lightness-hsl` with older QtWebEngine versions.
+# Type: String
+# Valid values:
+#   - lightness-cielab: Modify colors by converting them to CIELAB color space and inverting the L value. Not available with Qt < 5.14.
+#   - lightness-hsl: Modify colors by converting them to the HSL color space and inverting the lightness (i.e. the "L" in HSL).
+#   - brightness-rgb: Modify colors by subtracting each of r, g, and b from their maximum value.
+c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+
+# Contrast for dark mode. This only has an effect when
+# `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
+# `brightness-rgb`.
+# Type: Float
+c.colors.webpage.darkmode.contrast = 0.0
+
+# Which images to apply dark mode to. With QtWebEngine 5.15.0, this
+# setting can cause frequent renderer process crashes due to a
+# https://codereview.qt-project.org/c/qt/qtwebengine-
+# chromium/+/304211[bug in Qt].
+# Type: String
+# Valid values:
+#   - always: Apply dark mode filter to all images.
+#   - never: Never apply dark mode filter to any images.
+#   - smart: Apply dark mode based on image content. Not available with Qt 5.15.0.
+c.colors.webpage.darkmode.policy.images = 'smart'
+
+# Which pages to apply dark mode to. The underlying Chromium setting has
+# been removed in QtWebEngine 5.15.3, thus this setting is ignored
+# there. Instead, every element is now classified individually.
+# Type: String
+# Valid values:
+#   - always: Apply dark mode filter to all frames, regardless of content.
+#   - smart: Apply dark mode filter to frames based on background color.
+c.colors.webpage.darkmode.policy.page = 'smart'
+
+# Threshold for inverting text with dark mode. Text colors with
+# brightness below this threshold will be inverted, and above it will be
+# left as in the original, non-dark-mode page. Set to 256 to always
+# invert text color or to 0 to never invert text color.
+# Type: Int
+c.colors.webpage.darkmode.threshold.text = 220
+
+# Threshold for inverting background elements with dark mode. Background
+# elements with brightness above this threshold will be inverted, and
+# below it will be left as in the original, non-dark-mode page. Set to
+# 256 to never invert the color or to 0 to always invert it. Note: This
+# behavior is the opposite of `colors.webpage.darkmode.threshold.text`!
+# Type: Int
+c.colors.webpage.darkmode.threshold.background = 30
+
+# Render all colors as grayscale. This only has an effect when
+# `colors.webpage.darkmode.algorithm` is set to `lightness-hsl` or
+# `brightness-rgb`.
+# Type: Bool
+c.colors.webpage.darkmode.grayscale.all = False
+
+# Default font families to use. Whenever "default_family" is used in a
+# font setting, it's replaced with the fonts listed here. If set to an
+# empty value, a system-specific monospace default is used.
+# Type: List of Font, or Font
+c.fonts.default_family = 'Iosevka'
+
+# Default font size to use. Whenever "default_size" is used in a font
+# setting, it's replaced with the size listed here. Valid values are
+# either a float value with a "pt" suffix, or an integer value with a
+# "px" suffix.
+# Type: String
+c.fonts.default_size = '11pt'
+
+# Font used for the downloadbar.
+# Type: Font
+c.fonts.downloads = 'default_size default_family'
+
+# Font used in the statusbar.
+# Type: Font
+c.fonts.statusbar = 'default_size default_family'
+
+# This setting can be used to map keys to other keys. When the key used
+# as dictionary-key is pressed, the binding for the key used as
+# dictionary-value is invoked instead. This is useful for global
+# remappings of keys, for example to map Ctrl-[ to Escape. Note that
+# when a key is bound (via `bindings.default` or `bindings.commands`),
+# the mapping is ignored.
+# Type: Dict
+c.bindings.key_mappings = {'<Ctrl+6>': '<Ctrl+^>', '<Ctrl+Enter>': '<Ctrl+Return>', '<Ctrl+i>': '<Tab>', '<Ctrl+j>': '<Return>', '<Ctrl+m>': '<Return>', '<Ctrl+[>': '<Escape>', '<Enter>': '<Return>', '<Shift+Enter>': '<Return>', '<Shift+Return>': '<Return>'}
+
+# Bindings for normal mode
+config.bind(',M', 'hint links spawn mpv {hint-url}')
+config.bind(',m', 'spawn mpv qute://bindings/')
+config.bind('aa', 'download')
+config.bind('ac', 'download-clear')
+config.bind('ax', 'download-delete')
+config.unbind('q')
+config.bind('qq', 'quit')
+config.bind('tt', 'config-cycle tabs.width 10% 0%')
+config.bind('wd', 'close')

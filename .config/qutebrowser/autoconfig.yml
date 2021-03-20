@@ -87,7 +87,7 @@ settings:
   colors.webpage.darkmode.threshold.background:
     global: 50
   colors.webpage.darkmode.threshold.text:
-    global: 200
+    global: 220
   colors.webpage.preferred_color_scheme:
     global: dark
   completion.use_best_match:
@@ -139,7 +139,13 @@ settings:
   fonts.statusbar:
     global: default_size default_family
   hints.chars:
-    global: asdfjklö
+    global: sdfjkl
+  hints.radius:
+    global: 1
+  hints.scatter:
+    global: false
+  hints.uppercase:
+    global: true
   keyhint.delay:
     global: 100
   statusbar.show:
@@ -171,12 +177,14 @@ settings:
       left: 5
       right: 5
       top: 2
+  tabs.select_on_remove:
+    global: prev
   tabs.show:
     global: multiple
   tabs.show_switching_delay:
     global: 800
   tabs.title.format:
-    global: '{audio}{private}{current_title}'
+    global: '{private}{current_title}'
   tabs.width:
     global: 10%
   url.searchengines:
