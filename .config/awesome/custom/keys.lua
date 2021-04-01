@@ -4,6 +4,7 @@ local beautiful = require("beautiful")
 local dpi = require("beautiful").dpi
 --local naughty = require("naughty")
 local lain = require("lain")
+local machi = require("layout-machi")
 
 local hotkeys_popup = require("awful.hotkeys_popup")
 
@@ -29,6 +30,11 @@ local settings = require("custom.settings")
 
 -- {{{ Key bindings
 keys.globalkeys = gears.table.join(
+	-- machi layout
+	awful.key({modkey, }, ".", function () machi.default_editor.start_interactive() end,
+		{description = "edit machi layout if it's the current layout", group = "layout"}),
+	awful.key({modkey, }, ",", function () machi.switcher.start(client.focus) end, 
+		{description = "switch between windows for a machi layout", group = "layout"}),
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     -- awful.key({ altkey }, "p", function() os.execute("screenshot") end,

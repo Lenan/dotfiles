@@ -1,9 +1,11 @@
 local awful = require("awful")
+local machi = require('layout-machi')
 
 local layouts = {
     awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
     awful.layout.suit.floating,
+	machi.default_layout,
     --awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
     -- awful.layout.suit.fair,

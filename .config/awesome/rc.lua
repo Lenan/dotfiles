@@ -1,6 +1,7 @@
 local awful         = require("awful")
 require("awful.autofocus")
 local beautiful     = require("beautiful")
+local machi = require("layout-machi")
 
 -- autostart desired programs
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
@@ -19,6 +20,7 @@ local themes = {
 local chosen_theme = themes[2]
 
 beautiful.init(string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), chosen_theme))
+beautiful.layout_machi = machi.get_icon()
 
 require("custom.wallpaper")
 require("custom.rules")
