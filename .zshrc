@@ -121,3 +121,4 @@ export PATH="$HOME/.emacs.d/bin:$PATH"
 
 eval "$(starship init zsh)"
 colorscript random
+export PATH=$HOME/.config/nvcode/utils/bin:$PATH

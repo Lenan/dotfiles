@@ -203,7 +203,7 @@ config.set('content.javascript.enabled', True, 'qute://*/*')
 #   - true
 #   - false
 #   - ask
-config.set('content.notifications', False, 'https://aniwatch.me')
+config.set('content.notifications.enabled', False, 'https://aniwatch.me')
 
 # Allow websites to show notifications.
 # Type: BoolAsk
@@ -211,7 +211,7 @@ config.set('content.notifications', False, 'https://aniwatch.me')
 #   - true
 #   - false
 #   - ask
-config.set('content.notifications', False, 'https://www.netflix.com')
+config.set('content.notifications.enabled', False, 'https://www.netflix.com')
 
 # Allow websites to show notifications.
 # Type: BoolAsk
@@ -219,7 +219,7 @@ config.set('content.notifications', False, 'https://www.netflix.com')
 #   - true
 #   - false
 #   - ask
-config.set('content.notifications', False, 'https://www.reddit.com')
+config.set('content.notifications.enabled', False, 'https://www.reddit.com')
 
 # Allow websites to show notifications.
 # Type: BoolAsk
@@ -227,7 +227,7 @@ config.set('content.notifications', False, 'https://www.reddit.com')
 #   - true
 #   - false
 #   - ask
-config.set('content.notifications', False, 'https://www.youtube.com')
+config.set('content.notifications.enabled', False, 'https://www.youtube.com')
 
 # Execute the best-matching command on a partial match.
 # Type: Bool

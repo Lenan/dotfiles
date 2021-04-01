@@ -4,6 +4,8 @@ SETUVAR --export FZF_DEFAULT_COMMAND:rg\x20\x2d\x2dhidden\x20\x2d\x2dno\x2dignor
 SETUVAR --export MANPAGER:sh\x20\x2dc\x20\x27col\x20\x2dbx\x20\x7c\x20bat\x20\x2dl\x20man\x20\x2dp\x27
 SETUVAR --export RANGER_LOAD_DEFAULT_RC:false
 SETUVAR __fish_initialized:3100
+SETUVAR _fisher_fishgretel_2F_fasd_files:/home/lenan/\x2econfig/fish/functions/__fasd_print_completion\x2efish\x1e/home/lenan/\x2econfig/fish/functions/a\x2efish\x1e/home/lenan/\x2econfig/fish/functions/d\x2efish\x1e/home/lenan/\x2econfig/fish/functions/f\x2efish\x1e/home/lenan/\x2econfig/fish/functions/fasd_cd\x2efish\x1e/home/lenan/\x2econfig/fish/functions/s\x2efish\x1e/home/lenan/\x2econfig/fish/functions/sd\x2efish\x1e/home/lenan/\x2econfig/fish/functions/sf\x2efish\x1e/home/lenan/\x2econfig/fish/functions/z\x2efish\x1e/home/lenan/\x2econfig/fish/functions/zz\x2efish\x1e/home/lenan/\x2econfig/fish/conf\x2ed/__fasd_run\x2efish\x1e/home/lenan/\x2econfig/fish/conf\x2ed/aliases\x2efish\x1e/home/lenan/\x2econfig/fish/completions/a\x2efish\x1e/home/lenan/\x2econfig/fish/completions/d\x2efish\x1e/home/lenan/\x2econfig/fish/completions/f\x2efish\x1e/home/lenan/\x2econfig/fish/completions/fasd\x2efish\x1e/home/lenan/\x2econfig/fish/completions/s\x2efish\x1e/home/lenan/\x2econfig/fish/completions/sd\x2efish\x1e/home/lenan/\x2econfig/fish/completions/sf\x2efish\x1e/home/lenan/\x2econfig/fish/completions/z\x2efish\x1e/home/lenan/\x2econfig/fish/completions/zz\x2efish
+SETUVAR _fisher_plugins:fishgretel/fasd
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:005fd7
