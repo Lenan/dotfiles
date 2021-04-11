@@ -54,6 +54,9 @@
 !/.config/wal/
 !/.config/wal/**
 
+!/.config/xresources-colors/
+!/.config/xresources-colors/**
+
 # don't ignore #
 !/README.md
 !/LICENSE
