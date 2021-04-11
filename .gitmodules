@@ -1,0 +1,6 @@
+[submodule "/home/lenan/.config/awesome/layout-machi"]
+	path = /home/lenan/.config/awesome/layout-machi
+	url = https://github.com/Lenan/layout-machi.git
+[submodule ".config/awesome/layout-machi"]
+	path = .config/awesome/layout-machi
+	url = https://github.com/Lenan/layout-machi.git
