@@ -55,6 +55,9 @@
 /.config/ranger/commands_old.py
 /.config/ranger/rc.conf.save
 
+!/.config/rofi/
+!/.config/rofi/**
+
 !/.config/wal/
 !/.config/wal/**
 
