@@ -27,6 +27,9 @@
 !/.config/kitty/
 !/.config/kitty/**
 
+!/.config/mpd/
+!/.config/mpd/**
+
 !/.config/mpv/
 !/.config/mpv/**
 
