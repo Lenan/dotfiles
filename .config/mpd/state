@@ -1,0 +1,15 @@
+sw_volume: 50
+audio_device_state:1:Headphones
+audio_device_state:1:visualizer
+state: stop
+current: 0
+random: 0
+repeat: 1
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+0:Jimi Hendrix/Voodoo Child - The Jimi Hendrix Collection [Disc 1]/08 Little Wing.flac
+playlist_end
