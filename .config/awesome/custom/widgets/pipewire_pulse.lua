@@ -6,7 +6,7 @@ local apps = require("custom.apps")
 local markup = lain.util.markup
 
 local pipewire_pulse = awful.widget.watch(
-    'bash -c "pactl list sinks | grep -m 1 Volume | cut -d \"/\" -f 2 | tr -d [:blank:]"',
+    'bash -c "pactl list sinks | grep \'Volume: front-left\' | cut -d \' \' -f 6 | tr -d [:blank:]"',
     1,
     function(widget, stdout)
         local header = beautiful.vol_icon

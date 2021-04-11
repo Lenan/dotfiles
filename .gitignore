@@ -6,6 +6,7 @@
 # ... except for ...
 # files
 !/.Xresources
+!/.config/xresources-colors/
 !/.zshrc
 !/.config/starship.toml
 
