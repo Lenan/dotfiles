@@ -1,10 +1,10 @@
 local apps = {
-  terminal = "kitty -e fish ",
+  terminal = "kitty fish",
   musicplayer = "ncmpcpp",
   volcontrol = "pavucontrol",
   sysmonitor = "bpytop",
   gpumonitor = "gew",
-  term_filebrowser = "ranger",
+  term_filebrowser = "r", --ranger with cd on quit
   browser = os.getenv("BROWSER") or "firefox",
   browser2 = "qutebrowser",
   editor = os.getenv("EDITOR") or "nvim",

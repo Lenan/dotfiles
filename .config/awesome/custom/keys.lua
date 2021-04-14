@@ -271,7 +271,7 @@ keys.globalkeys = gears.table.join(
               {description = "open "..apps.browser, group = "shortcuts"}),
     awful.key({ modkey, "Shift" }, "b", function () awful.spawn.raise_or_spawn(apps.browser2) end,
               {description = "open "..apps.browser2, group = "shortcuts"}),
-    awful.key({ modkey }, "r", function() awful.spawn(apps.terminal.. " "..apps.term_filebrowser) end,
+    awful.key({ modkey }, "r", function() awful.spawn(apps.terminal .." -c ".. apps.term_filebrowser) end,
               {description = "open " .. apps.term_filebrowser, group = "shortcuts"}),
     awful.key({ modkey }, "v", function() awful.spawn(apps.voicechat) end,
               {description = "open "..apps.voicechat, group = "shortcuts"}),
@@ -359,23 +359,23 @@ keys.clientkeys = gears.table.join(
               {description = "toggle keep on top", group = "client"}),
     awful.key({ modkey, }, "t", function (c) awful.titlebar.toggle(c) end,
               {description = "toggle titlebar", group = "client"}),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end ,
-        {description = "minimize", group = "client"}),
-    awful.key({ modkey, "Shift" }, "n",
-              function ()
-                  local c = awful.client.restore()
-                  -- Focus restored client
-                  if c then
-                      client.focus = c
-                      c:raise()
-                  end
-              end,
-              {description = "unminimize", group = "client"}),
+    --awful.key({ modkey,           }, "n",
+    --    function (c)
+    --        -- The client currently has the input focus, so it cannot be
+    --        -- minimized, since minimized clients can't have the focus.
+    --        c.minimized = true
+    --    end ,
+    --    {description = "minimize", group = "client"}),
+    --awful.key({ modkey, "Shift" }, "n",
+    --          function ()
+    --              local c = awful.client.restore()
+    --              -- Focus restored client
+    --              if c then
+    --                  client.focus = c
+    --                  c:raise()
+    --              end
+    --          end,
+    --          {description = "unminimize", group = "client"}),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized

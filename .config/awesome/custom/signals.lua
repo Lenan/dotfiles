@@ -86,7 +86,6 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 local function set_no_border(s)
-
     local only_one = #s.tiled_clients == 1
     for _, c in pairs(s.clients) do
         if only_one and not c.floating or c.maximized then
@@ -98,6 +97,18 @@ local function set_no_border(s)
 end
 -- No borders when rearranging only 1 non-floating or maximized client
 --screen.connect_signal("arrange", set_no_border)
+local function hide_wibar_when_fullscreen(s)
+	for _, c in pairs(s.clients) do
+		if c.fullscreen then
+			s.mywibox.visible = false
+			return
+		else
+			s.mywibox.visible = true
+			return
+		end
+	end
+end
+screen.connect_signal("arrange", hide_wibar_when_fullscreen)
 
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
