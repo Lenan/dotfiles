@@ -3,8 +3,10 @@
 SETUVAR --export FZF_DEFAULT_COMMAND:rg\x20\x2d\x2dhidden\x20\x2d\x2dno\x2dignore\x20\x2d\x2dfiles\x20\x2dg\x20\x21go/\x20\x2dg\x21\x2ecache\x20\x2dg\x20\x21Games/
 SETUVAR --export MANPAGER:sh\x20\x2dc\x20\x27col\x20\x2dbx\x20\x7c\x20bat\x20\x2dl\x20man\x20\x2dp\x27
 SETUVAR --export NNN_BMS:d\x3a\x7e/Downloads/\x3bD\x3a\x7e/Documents\x3bv\x3a\x7e/Videos\x3bg\x3a\x7e/Games/\x3bG\x3a/mnt/SSD/Games/\x3bs\x3a\x7e/\x2esteam/steam/steamapps/common\x3bh\x3a\x7e\x3b\x2e\x3a\x7e/\x2econfig\x3ba\x3a\x7e/\x2econfig/awesome
-SETUVAR --export NNN_PLUG:p\x3apreview\x2dtui\x2dext\x3b
+SETUVAR --export NNN_OPENER:/home/lenan/\x2econfig/nnn/plugins/nuke
+SETUVAR --export NNN_PLUG:p\x3apreview\x2dtui\x2dext\x3bB\x3abookmarks
 SETUVAR --export RANGER_LOAD_DEFAULT_RC:false
+SETUVAR SXHKD_SHELL:/usr/bin/bash
 SETUVAR __fish_initialized:3100
 SETUVAR _fisher_fishgretel_2F_fasd_files:/home/lenan/\x2econfig/fish/functions/__fasd_print_completion\x2efish\x1e/home/lenan/\x2econfig/fish/functions/a\x2efish\x1e/home/lenan/\x2econfig/fish/functions/d\x2efish\x1e/home/lenan/\x2econfig/fish/functions/f\x2efish\x1e/home/lenan/\x2econfig/fish/functions/fasd_cd\x2efish\x1e/home/lenan/\x2econfig/fish/functions/s\x2efish\x1e/home/lenan/\x2econfig/fish/functions/sd\x2efish\x1e/home/lenan/\x2econfig/fish/functions/sf\x2efish\x1e/home/lenan/\x2econfig/fish/functions/z\x2efish\x1e/home/lenan/\x2econfig/fish/functions/zz\x2efish\x1e/home/lenan/\x2econfig/fish/conf\x2ed/__fasd_run\x2efish\x1e/home/lenan/\x2econfig/fish/conf\x2ed/aliases\x2efish\x1e/home/lenan/\x2econfig/fish/completions/a\x2efish\x1e/home/lenan/\x2econfig/fish/completions/d\x2efish\x1e/home/lenan/\x2econfig/fish/completions/f\x2efish\x1e/home/lenan/\x2econfig/fish/completions/fasd\x2efish\x1e/home/lenan/\x2econfig/fish/completions/s\x2efish\x1e/home/lenan/\x2econfig/fish/completions/sd\x2efish\x1e/home/lenan/\x2econfig/fish/completions/sf\x2efish\x1e/home/lenan/\x2econfig/fish/completions/z\x2efish\x1e/home/lenan/\x2econfig/fish/completions/zz\x2efish
 SETUVAR _fisher_plugins:fishgretel/fasd
