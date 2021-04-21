@@ -1,5 +1,5 @@
 local apps = {
-  terminal = "kitty fish",
+  terminal = "kitty",
   musicplayer = "ncmpcpp",
   volcontrol = "pavucontrol",
   sysmonitor = "bpytop",

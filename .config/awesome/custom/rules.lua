@@ -29,9 +29,9 @@ ruled.client.append_rules ({
                      raise = true,
                      keys = keys.clientkeys,
                      buttons = keys.clientbuttons,
-                     screen = awful.screen.preferred,
+                     screen = awful.screen.focused,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen,
-                     size_hints_honor = false
+                     size_hints_honor = true
       }, callback = awful.client.setslave
     },
 
@@ -46,8 +46,8 @@ ruled.client.append_rules ({
 
     --Rules for kitty
     { rule_any = { class = { "kitty" } },
---      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } --Nerd Font
-      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } --Font Awesome
+--      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true } --Nerd Font
+      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true, } --Font Awesome
     },
 
     --Rules for GIMP
@@ -56,13 +56,13 @@ ruled.client.append_rules ({
     },
 
     { rule_any = { name = { "Firefox" } },
---       properties = { screen = mouse.screen, tag = "爵", switch_to_tags = true } -- Nerd Font
-       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
+--       properties = { screen = awful.screen.focused, tag = "爵", switch_to_tags = true } -- Nerd Font
+       properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
     },
 
     { rule_any = { class = { "qutebrowser" } },
---       properties = { screen = mouse.screen, tag = "爵", switch_to_tags = true } -- Nerd Font
-       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
+--       properties = { screen = awful.screen.focused, tag = "爵", switch_to_tags = true } -- Nerd Font
+       properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
     },
     -- Rule for Variety Wallpapers
     { rule_any = { name = { "Variety .*" } },
@@ -72,7 +72,7 @@ ruled.client.append_rules ({
 
     -- Rule for Origin
     { rule_any = { instance = { "origin.exe" }, name = { "Origin.*" } },
-      properties = { floating = true } 
+      properties = { floating = true, placement = awful.placement.centered }
     },
 
     -- Rule for Epic Games Launcher
@@ -80,20 +80,16 @@ ruled.client.append_rules ({
       properties = { floating = true }
     },
 
-    -- Star Wars Battlefront 2 (2017)
-    { rule_any = { class = { "starwarsbattlefrontii.exe" } },
-      properties = { floating = true }
-    },
 
     { rule_any = { name = { "Lutris" } },
- --      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } -- Nerd Font
-       properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
+ --      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true } -- Nerd Font
+       properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
     },
 
     -- Rules for Steam
     { rule_any = { name = { "Steam" } },
---      properties = { screen = mouse.screen, tag = "", switch_to_tags = true } -- Nerd Font
-      properties = { screen = mouse.screen, tag = "", switch_to_tags = true }
+--      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true } -- Nerd Font
+      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
     },
 
     { rule_any = { name = { "Steam Controller Configuration" } },
@@ -104,10 +100,6 @@ ruled.client.append_rules ({
       properties = { screen = 2 }
     },
 
-    -- Rule for Factorio
-    { rule_any = { name = {  "Factorio .*"} },
-      properties = { floating = true, maximized = true, fullscreen = true}
-    },
     { rule_any = { class = { "steam_app_.*" } },
       properties = { maximized = true, fullscreen = true }
     },

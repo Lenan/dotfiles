@@ -33,7 +33,7 @@ keys.globalkeys = gears.table.join(
 	-- machi layout
 	awful.key({modkey, }, ".", function () machi.default_editor.start_interactive() end,
 		{description = "edit machi layout if it's the current layout", group = "layout"}),
-	awful.key({modkey, }, ",", function () machi.switcher.start(client.focus) end, 
+	awful.key({modkey, }, ",", function () machi.switcher.start(client.focus) end,
 		{description = "switch between windows for a machi layout", group = "layout"}),
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
@@ -41,8 +41,8 @@ keys.globalkeys = gears.table.join(
     --           {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
-    -- awful.key({ altkey, "Control" }, "l", function () os.execute(scrlocker) end,
-              -- {description = "lock screen", group = "hotkeys"}),
+    awful.key({ modkey, "Control", altkey }, "l", function() awful.spawn.with_shell('~/.config/awesome/lock.sh') end,
+              {description = "lock screen", group = "hotkeys"}),
 
     -- Hotkeys
     awful.key({ modkey, "Shift" }, "s", hotkeys_popup.show_help,
@@ -150,15 +150,8 @@ keys.globalkeys = gears.table.join(
             {description = "open client/window switcher", group = "client"}),
 
     -- Show/Hide Wibox
-    -- awful.key({ modkey }, "b", function ()
-    --         for s in screen do
-    --             s.mywibox.visible = not s.mywibox.visible
-    --             if s.mybottomwibox then
-    --                 s.mybottomwibox.visible = not s.mybottomwibox.visible
-    --             end
-    --         end
-    --     end,
-    --     {description = "toggle wibox", group = "awesome"}),
+    awful.key({ modkey }, "w", function () awful.screen.focused().mywibox.visible = not awful.screen.focused().mywibox.visible end,
+			  {description = "toggle wibox on focused screen", group = "awesome"}),
 
     -- On the fly useless gaps change
     -- awful.key({ altkey, "Control" }, "+", function () beautiful.useless_gaps = beautiful.useless_gaps + 1 end,
@@ -169,8 +162,8 @@ keys.globalkeys = gears.table.join(
 
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    -- awful.key({ modkey, "Shift"   }, "q", awesome.quit,
-    --           {description = "quit awesome", group = "awesome"}),
+    awful.key({ modkey, "Control", altkey   }, "q", awesome.quit,
+              {description = "quit awesome", group = "awesome"}),
 
     awful.key({ modkey, altkey }, "l", function () awful.tag.incmwfact( 0.05) end,
               {description = "increase master width factor", group = "layout"}),
@@ -347,7 +340,7 @@ keys.clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Control"   }, "q",      function (c) c:kill()                         end,
+    awful.key({ modkey,  }, "q",      function (c) c:kill()                         end,
               {description = "kill", group = "client"}),
     awful.key({ modkey,  }, "f",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),

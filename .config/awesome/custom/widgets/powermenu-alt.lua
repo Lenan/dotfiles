@@ -15,7 +15,7 @@ powermenu.message:set_markup(markup.font(beautiful.font, markup(beautiful.fg_nor
 powermenu.logout = wibox.widget.textbox("")
 powermenu.logout:buttons(awful.util.table.join(awful.button({},1,function() os.execute("mpc stop;"); awesome.quit() end)))
 powermenu.logout:set_markup(
-	markup.font(beautiful.icon_font, markup(beautiful.fg_normal, " "))
+	markup.font(beautiful.icon_font, markup(beautiful.fg_normal, "﫼 "))
 	..
 	markup.font(beautiful.font, markup(beautiful.fg_normal, "Logout"))
 )
@@ -36,6 +36,14 @@ powermenu.shutdown:set_markup(
 	markup.font(beautiful.font, markup(beautiful.fg_normal, "Poweroff"))
 )
 
+powermenu.lock = wibox.widget.textbox("")
+powermenu.lock:buttons(awful.util.table.join(awful.button({},1,function() os.execute ("mpc stop; loginctl lock-session") end)))
+powermenu.lock:set_markup(
+	markup.font(beautiful.icon_font, markup(beautiful.fg_normal, " "))
+	..
+	markup.font(beautiful.font, markup(beautiful.fg_normal, "Lock"))
+)
+
 powermenu.popup = awful.popup{
     visible = false,
     ontop = true,
@@ -48,6 +56,7 @@ powermenu.popup = awful.popup{
     widget={
         {
             powermenu.message,
+			powermenu.lock,
             powermenu.logout,
             powermenu.reboot,
             powermenu.shutdown,

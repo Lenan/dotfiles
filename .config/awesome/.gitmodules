@@ -1,0 +1,3 @@
+[submodule "layout-machi"]
+	path = layout-machi
+	url = git@github.com:Lenan/layout-machi.git

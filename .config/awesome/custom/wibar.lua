@@ -139,10 +139,10 @@ function On_screen_connect(s)
             cpu,
             gpu,
             ram,
-            vpn,
             clock,
-            s.systray,
-            --powermenu,
+            vpn,
+            -- s.systray,
+            -- powermenu,
             powermenu_alt,
         },
     }

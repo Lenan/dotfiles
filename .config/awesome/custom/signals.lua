@@ -4,13 +4,16 @@ local beautiful = require("beautiful")
 local wibox = require("wibox")
 local settings = require("custom.settings")
 
+local awesome, client, screen = awesome, client, screen
 -- {{{ Signals
+client.connect_signal("request::activate",function (c)
+end)
+
 -- Signal function to execute when a new client appears.
-client.connect_signal("manage", function (c)
+client.connect_signal("request::manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-
     if awesome.startup and
       not c.size_hints.user_position
       and not c.size_hints.program_position then
@@ -85,18 +88,20 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
-local function set_no_border(s)
-    local only_one = #s.tiled_clients == 1
-    for _, c in pairs(s.clients) do
-        if only_one and not c.floating or c.maximized then
-            c.border_width = 0
-        else
-            c.border_width = beautiful.border_width
-        end
-    end
-end
+--local function set_no_border(s)
+--    local only_one = #s.tiled_clients == 1
+--    for _, c in pairs(s.clients) do
+-- if only_one and not c.floating or c.maximized then
+--            c.border_width = 0
+--        else
+--            c.border_width = beautiful.border_width
+--        end
+--    end
+--end
 -- No borders when rearranging only 1 non-floating or maximized client
 --screen.connect_signal("arrange", set_no_border)
+
+-- Hide wibar when a client is in fullscreen
 local function hide_wibar_when_fullscreen(s)
 	for _, c in pairs(s.clients) do
 		if c.fullscreen then
@@ -108,7 +113,7 @@ local function hide_wibar_when_fullscreen(s)
 		end
 	end
 end
-screen.connect_signal("arrange", hide_wibar_when_fullscreen)
+screen.connect_signal("request::arrange", hide_wibar_when_fullscreen)
 
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
