@@ -17,7 +17,7 @@ xdotool mousemove 1280 720
 # autostart programs
 run unclutter --root
 run /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-run picom --experimental-backends &
+#run picom --experimental-backends &
 run numlockx on &
 run xss-lock -- betterlockscreen -l blur &
 #run caffeine -d &

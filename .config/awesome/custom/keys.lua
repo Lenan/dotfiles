@@ -254,7 +254,7 @@ keys.globalkeys = gears.table.join(
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ modkey }, "space", function() awful.spawn.with_shell("rofi -show drun -modi drun,window,run") end,
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("~/.config/rofi/launchers/text/launcher.sh") end,
               {description = "open rofi", group = "shortcuts"}),
     awful.key({ modkey }, "Return", function () awful.spawn(apps.terminal) end,
               {description = "open terminal(" ..apps.terminal..")", group = "shortcuts"}),
@@ -264,11 +264,11 @@ keys.globalkeys = gears.table.join(
               {description = "open "..apps.browser, group = "shortcuts"}),
     awful.key({ modkey, "Shift" }, "b", function () awful.spawn.raise_or_spawn(apps.browser2) end,
               {description = "open "..apps.browser2, group = "shortcuts"}),
-    awful.key({ modkey }, "r", function() awful.spawn(apps.terminal .." -c ".. apps.term_filebrowser) end,
+    awful.key({ modkey }, "r", function() awful.spawn(apps.terminal .." " .. apps.term_filebrowser) end,
               {description = "open " .. apps.term_filebrowser, group = "shortcuts"}),
     awful.key({ modkey }, "v", function() awful.spawn(apps.voicechat) end,
               {description = "open "..apps.voicechat, group = "shortcuts"}),
-    awful.key({ modkey }, "p", function() awful.spawn(apps.pwmanager) end,
+    awful.key({ modkey }, "p", function() awful.spawn.with_shell(apps.pwmanager) end,
               {description = "open password manager", group = "shortcuts"})
 )
 

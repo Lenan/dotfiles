@@ -6,17 +6,13 @@ local settings = require("custom.settings")
 
 local awesome, client, screen = awesome, client, screen
 -- {{{ Signals
-client.connect_signal("request::activate",function (c)
-end)
 
 -- Signal function to execute when a new client appears.
-client.connect_signal("request::manage", function (c)
+client.connect_signal("request::manage", function(c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-    if awesome.startup and
-      not c.size_hints.user_position
-      and not c.size_hints.program_position then
+    if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
@@ -32,17 +28,15 @@ client.connect_signal("request::titlebars", function(c)
 
     -- Default
     -- buttons for the titlebar
-    local buttons = gears.table.join(
-        awful.button({ }, 1, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
-        end),
-        awful.button({ }, 2, function() c:kill() end),
-        awful.button({ }, 3, function()
-            c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.resize(c)
-        end)
-    )
+    local buttons = gears.table.join(awful.button({}, 1, function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.move(c)
+    end), awful.button({}, 2, function()
+        c:kill()
+    end), awful.button({}, 3, function()
+        c:emit_signal("request::activate", "titlebar", {raise = true})
+        awful.mouse.client.resize(c)
+    end))
 
     local titlewidget = awful.titlebar.widget.titlewidget(c)
     titlewidget.ellipsize = "end"
@@ -50,29 +44,29 @@ client.connect_signal("request::titlebars", function(c)
     awful.titlebar(c, {
         size = beautiful.bar_height,
         bg_normal = beautiful.titlebar_bg_normal,
-        bg_focus = beautiful.titlebar_bg_focus,
-    }) : setup {
+        bg_focus = beautiful.titlebar_bg_focus
+    }):setup{
         { -- Left
             awful.titlebar.widget.iconwidget(c),
             titlewidget,
             buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
+            layout = wibox.layout.fixed.horizontal
         },
         { -- Middle
             -- { -- Title
-                -- align  = "center",
-                -- widget = titlewidget
+            -- align  = "center",
+            -- widget = titlewidget
             -- },
             -- buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
+            layout = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.minimizebutton (c),
+            awful.titlebar.widget.stickybutton(c),
+            awful.titlebar.widget.ontopbutton(c),
+            awful.titlebar.widget.floatingbutton(c),
+            awful.titlebar.widget.minimizebutton(c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.closebutton    (c),
+            awful.titlebar.widget.closebutton(c),
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
@@ -85,10 +79,15 @@ client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = settings.vi_focus})
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+end)
+client.connect_signal("unfocus", function(c)
+    c.border_color = beautiful.border_normal
+end)
 
---local function set_no_border(s)
+---- THIS CAN CAUSE SCREEN FREEZES, DO NOT USE
+-- local function set_no_border(s)
 --    local only_one = #s.tiled_clients == 1
 --    for _, c in pairs(s.clients) do
 -- if only_one and not c.floating or c.maximized then
@@ -97,23 +96,24 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 --            c.border_width = beautiful.border_width
 --        end
 --    end
---end
+-- end
 -- No borders when rearranging only 1 non-floating or maximized client
---screen.connect_signal("arrange", set_no_border)
+-- screen.connect_signal("arrange", set_no_border)
 
+-- This is in an unreliable state... use manual wibar hiding if you need to.
 -- Hide wibar when a client is in fullscreen
-local function hide_wibar_when_fullscreen(s)
-	for _, c in pairs(s.clients) do
-		if c.fullscreen then
-			s.mywibox.visible = false
-			return
-		else
-			s.mywibox.visible = true
-			return
-		end
-	end
-end
-screen.connect_signal("request::arrange", hide_wibar_when_fullscreen)
+-- local function hide_wibar_when_fullscreen(s)
+--     for _, c in pairs(s.clients) do
+--         if c.fullscreen then
+--             s.mywibox.visible = false
+--             return
+--         else
+--             s.mywibox.visible = true
+--             return
+--         end
+--     end
+-- end
+-- screen.connect_signal("arrange", hide_wibar_when_fullscreen)
 
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
