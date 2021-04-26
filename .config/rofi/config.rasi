@@ -1,5 +1,6 @@
-/* Rofi config file */
+/** Basic config file **/
+
 configuration {
-/*    theme: "oxide";*/
-	theme: "colors-rofi-dark";
+  show-icons:         true;
+  icon-theme:         "Papirus";
 }
