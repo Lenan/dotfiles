@@ -6,5 +6,21 @@
 
 config_version: 2
 settings:
-  statusbar.show:
-    global: always
+  bindings.commands:
+    global:
+      normal:
+        ',M': hint links spawn mpv {hint-url}
+        ',m': spawn mpv qute://bindings/
+        aa: download
+        ac: download-clear
+        ax: download-delete
+        gpf: spawn --userscript qute-bitwarden
+        gpp: spawn --userscript qute-bitwarden --password-only
+        q: null
+        qq: quit
+        tt: config-cycle tabs.width 15% 0%
+        wd: close
+  scrolling.smooth:
+    global: false
+  tabs.width:
+    global: 15%

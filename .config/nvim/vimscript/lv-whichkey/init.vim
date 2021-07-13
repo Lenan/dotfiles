@@ -47,20 +47,19 @@ let g:which_key_map.w = {
       \ 'name' : '+windows',
       \ 'd' : [':close'	, 'close window'],
       \ 'v' : [':vs'  	, 'split vertically'],
-      \ 'h' : [':split'	, 'split horizontally'],
+      \ 'h' : [':hs'	, 'split horizontally'],
       \ }
 
 " f is for files
-let g:which_key_map.f = {
-      \ 'name' : '+files',
-      \ 'f' : [':Telescope find_files'    , 'find files'],
-      \ 'l' : [':NvimTreeFindFile'        , 'find file in tree'],
-      \ 'd' : [':BufferClose'       	  , 'close file'],
-      \ }
-let g:which_key_map.f.s = 'write file'
-let g:which_key_map.f.t = 'tree'
-let g:which_key_map.f.r = 'ranger'
-
+" let g:which_key_map.f = {
+"       \ 'name' : '+files',
+"       \ 'f' : [':Telescope find_files'    , 'find files'],
+"       \ 'r' : [':RnvimrToggle'            , 'ranger'],
+"       \ 't' : [':NvimTreeToggle'          , 'tree'],
+"       \ 'l' : [':NvimTreeFindFile'        , 'find file in tree'],
+"       \ 's' : [':w'        				  , 'write file'],
+"       \ 'd' : [':BufferClose'       	  , 'close file'],
+"       \ }
 " b is for buffer
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,

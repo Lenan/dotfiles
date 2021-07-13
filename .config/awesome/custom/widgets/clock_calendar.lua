@@ -10,7 +10,7 @@ local markup = lain.util.markup
 local widget = {}
 widget.textclock = wibox.widget.textclock(
       markup.font(beautiful.icon_font, markup(beautiful.cal_icon_color, beautiful.cal_icon )) ..
-      markup.font(beautiful.font, markup(beautiful.fg_normal, " %d %b "))..
+      markup.font(beautiful.font, markup(beautiful.fg_normal, " %a %d %b "))..
       markup.font(beautiful.icon_font, markup(beautiful.cal_icon_color, beautiful.clock_icon )) ..
       markup.font(beautiful.font, markup(beautiful.fg_normal, " %H:%M"))
 )

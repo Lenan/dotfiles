@@ -19,8 +19,14 @@
 /.config/awesome/*.md
 /.config/awesome/awesomewm-colors.lua
 
+!/.config/bspwm/
+!/.config/bspwm/**
+
 !/.doom.d/
 !/.doom.d/**
+
+!/.config/dunst/
+!/.config/dunst/**
 
 !/.config/fish
 !/.config/fish/**
@@ -43,6 +49,9 @@
 
 !/.config/picom/
 !/.config/picom/**
+
+!/.config/polybar/
+!/.config/polybar/**
 
 !/.config/qutebrowser/
 !/.config/qutebrowser/**

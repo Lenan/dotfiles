@@ -6,7 +6,10 @@ local apps = require("custom.apps")
 local markup = lain.util.markup
 
 local pipewire_pulse = awful.widget.watch(
-    'bash -c "pactl list sinks | grep \'Volume: front-left\' | cut -d \'/\' -f 4 | tr -d [:blank:]"',
+	-- If Sound device is set to Pro Audio, uncomment this line
+    'bash -c "pactl list sinks | grep \'Volume:\' -m 1 | cut -d \'/\' -f 4 | tr -d [:blank:]"',
+	-- else uncomment this one
+    -- 'bash -c "pactl list sinks | grep \'Volume: front-left\' | cut -d \'/\' -f 4 | tr -d [:blank:]"',
     1,
     function(widget, stdout)
         local header = beautiful.vol_icon

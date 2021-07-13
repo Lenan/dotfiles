@@ -31,7 +31,7 @@ ruled.client.append_rules ({
                      buttons = keys.clientbuttons,
                      screen = awful.screen.focused,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen,
-                     size_hints_honor = true
+                     size_hints_honor = false
       }, callback = awful.client.setslave
     },
 
@@ -40,14 +40,9 @@ ruled.client.append_rules ({
         properties = { titlebars_enabled = false }
     },
 
-    -- Set Firefox to always map on the first tag on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = awful.util.tagnames[1] } },
-
     --Rules for kitty
     { rule_any = { class = { "kitty" } },
---      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true } --Nerd Font
-      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true, } --Font Awesome
+      properties = { screen = awful.screen.focused, tag = beautiful.taglist_icons[3], switch_to_tags = true, }
     },
 
     --Rules for GIMP
@@ -56,13 +51,11 @@ ruled.client.append_rules ({
     },
 
     { rule_any = { name = { "Firefox" } },
---       properties = { screen = awful.screen.focused, tag = "爵", switch_to_tags = true } -- Nerd Font
-       properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
+       properties = { screen = awful.screen.focused, tag = beautiful.taglist_icons[1], switch_to_tags = true }
     },
 
     { rule_any = { class = { "qutebrowser" } },
---       properties = { screen = awful.screen.focused, tag = "爵", switch_to_tags = true } -- Nerd Font
-       properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
+       properties = { screen = awful.screen.focused, tag = beautiful.taglist_icons[1], switch_to_tags = true }
     },
     -- Rule for Variety Wallpapers
     { rule_any = { name = { "Variety .*" } },
@@ -82,26 +75,24 @@ ruled.client.append_rules ({
 
 
     { rule_any = { name = { "Lutris" } },
- --      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true } -- Nerd Font
-       properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
+      properties = { screen = awful.screen.focused, tag = beautiful.taglist_icons[2], switch_to_tags = true }
     },
 
     -- Rules for Steam
     { rule_any = { name = { "Steam" } },
---      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true } -- Nerd Font
-      properties = { screen = awful.screen.focused, tag = "", switch_to_tags = true }
+      properties = { screen = awful.screen.focused, tag = beautiful.taglist_icons[2], switch_to_tags = true }
     },
 
     { rule_any = { name = { "Steam Controller Configuration" } },
       properties = { floating = true }
     },
 
-    { rule_any = { name = { "Friends List.*" } },
+    { rule_any = { name = { "Friends List" } },
       properties = { screen = 2 }
     },
 
     { rule_any = { class = { "steam_app_.*" } },
-      properties = { maximized = true, fullscreen = true }
+      properties = { fullscreen = true }
     },
 
     -- Rule for Teamspeak

@@ -11,7 +11,7 @@
 #   qute://help/settings.html
 
 # Change the argument to True to still load settings configured via autoconfig.yml
-config.load_autoconfig(False)
+config.load_autoconfig(True)
 
 # Aliases for commands. The keys of the given dictionary are the
 # aliases, while the values are the commands they map to.
@@ -358,7 +358,7 @@ c.tabs.select_on_remove = 'prev'
 #   - never: Always hide the tab bar.
 #   - multiple: Hide the tab bar if only one tab is open.
 #   - switching: Show the tab bar when switching tabs.
-c.tabs.show = 'multiple'
+c.tabs.show = 'always'
 
 # Duration (in milliseconds) to show the tab bar before hiding it when
 # tabs.show is set to 'switching'.
@@ -583,7 +583,7 @@ c.fonts.default_family = 'Iosevka'
 # either a float value with a "pt" suffix, or an integer value with a
 # "px" suffix.
 # Type: String
-c.fonts.default_size = '11pt'
+c.fonts.default_size = '12pt'
 
 # Font used for the downloadbar.
 # Type: Font
@@ -610,5 +610,5 @@ config.bind('ac', 'download-clear')
 config.bind('ax', 'download-delete')
 config.unbind('q')
 config.bind('qq', 'quit')
-config.bind('tt', 'config-cycle tabs.width 10% 0%')
+config.bind('tt', 'config-cycle tabs.width 15% 0%')
 config.bind('wd', 'close')

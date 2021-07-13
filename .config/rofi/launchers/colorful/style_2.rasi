@@ -9,6 +9,8 @@
 
 configuration {
 	font:							"Iosevka Nerd Font 10";
+    sort:                           true;
+    sorting-method:                 "fzf";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     display-drun: 					"";

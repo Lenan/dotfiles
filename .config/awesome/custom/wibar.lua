@@ -32,25 +32,32 @@ function On_screen_connect(s)
         buttons = keys.taglist,
         layout = {layout = wibox.layout.fixed.horizontal},
         widget_template = {
-            {
                 {
-                    {forced_width = dpi(12), id = 'text_role', widget = wibox.widget.textbox},
-                    layout = wibox.layout.align.horizontal
+                    {
+                        {
+                            id = 'text_role',
+                            widget = wibox.widget.textbox
+                        },
+                        layout = wibox.layout.align.horizontal
+                    },
+                    left = dpi(2),
+                    right = dpi(2),
+                    bottom = dpi(0),
+                    top = dpi(0),
+                    widget = wibox.container.margin
                 },
-                left = beautiful.taglist_margin_left or dpi(2),
-                right = beautiful.taglist_margin_right or dpi(2),
-                widget = wibox.container.margin
-            },
-            id = 'background_role',
-            widget = wibox.container.background
-        }
+                widget = wibox.container.margin,
+                left = beautiful.taglist_margin_left,
+                right = beautiful.taglist_margin_right
+            }
     }
 
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = wibox.widget {
-        {awful.widget.layoutbox(s), margins = dpi(8), widget = wibox.container.margin},
-        widget = wibox.container.margin
+            awful.widget.layoutbox(s),
+            margins = dpi(7),
+            widget = wibox.container.margin
     }
 
     s.mylayoutbox:buttons(awful.util.table.join(awful.button({}, 1, function()
@@ -70,11 +77,18 @@ function On_screen_connect(s)
         screen = s,
         filter = awful.widget.tasklist.filter.currenttags,
         buttons = keys.tasklist,
-        layout = {layout = wibox.layout.fixed.horizontal},
+        layout = {
+            layout = wibox.layout.fixed.horizontal
+        },
         -- Notice that there is *NO* wibox.wibox prefix, it is a template,
         -- not a widget instance.
+
         widget_template = {
-            {forced_height = dpi(3), id = 'background_role', widget = wibox.container.background},
+            {
+                forced_height = dpi(3),
+                id = 'background_role',
+                widget = wibox.container.background
+            },
             {
                 {
                     {
@@ -83,7 +97,10 @@ function On_screen_connect(s)
                         margins = beautiful.tasklist_icon_margins or dpi(5),
                         widget = wibox.container.margin
                     },
-                    {id = 'text_role', widget = wibox.widget.textbox},
+                    {
+                        id = 'text_role',
+                        widget = wibox.widget.textbox
+                    },
                     layout = wibox.layout.align.horizontal
                 },
                 right = beautiful.tasklist_item_margins_right or dpi(5),
@@ -110,7 +127,18 @@ function On_screen_connect(s)
         { -- Left widgets
             layout = wibox.layout.align.horizontal,
             s.mylayoutbox,
-            s.mytaglist
+            {
+                {
+                    s.mytaglist,
+                    widget = wibox.container.background,
+                    bg = beautiful.bg_shaded,
+                    shape = gears.shape.octogon
+                },
+                widget = wibox.container.margin,
+                top = dpi(5),
+                bottom = dpi(5),
+            }
+            -- s.mytaglist
             -- s.mypromptbox,
         },
         {

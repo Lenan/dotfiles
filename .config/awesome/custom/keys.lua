@@ -41,7 +41,8 @@ keys.globalkeys = gears.table.join(
     --           {description = "take a screenshot", group = "hotkeys"}),
 
     -- X screen locker
-    awful.key({ modkey, "Control", altkey }, "l", function() awful.spawn.with_shell('~/.config/awesome/lock.sh') end,
+    -- awful.key({ modkey, "Control", altkey }, "l", function() awful.spawn.with_shell('~/.config/awesome/lock.sh') end,
+    awful.key({ modkey, "Control", altkey }, "l", function() awful.spawn.with_shell('rofi -show power-menu -modi "power-menu:~/.config/rofi/rofi-powermenu --choices=lockscreen/logout/reboot/shutdown" -theme "~/.config/rofi/launchers/colorful/style_2.rasi"') end,
               {description = "lock screen", group = "hotkeys"}),
 
     -- Hotkeys
@@ -146,7 +147,7 @@ keys.globalkeys = gears.table.join(
         {description = "cycle through clients backward", group = "client"}),
 
     -- Similar to alt+tabbing, but all windows and using rofi
-    awful.key({ modkey }, "Tab", function() awful.spawn.with_shell("rofi -show window -modi window") end,
+    awful.key({ modkey }, "Tab", function() awful.spawn.with_shell('rofi -show window -modi window -theme "~/.config/rofi/launchers/colorful/style_2.rasi"') end,
             {description = "open client/window switcher", group = "client"}),
 
     -- Show/Hide Wibox
@@ -254,17 +255,17 @@ keys.globalkeys = gears.table.join(
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
-    awful.key({ modkey }, "space", function() awful.spawn.with_shell("~/.config/rofi/launchers/text/launcher.sh") end,
+    awful.key({ modkey }, "space", function() awful.spawn.with_shell("~/.config/rofi/launchers/colorful/launcher.sh") end,
               {description = "open rofi", group = "shortcuts"}),
     awful.key({ modkey }, "Return", function () awful.spawn(apps.terminal) end,
               {description = "open terminal(" ..apps.terminal..")", group = "shortcuts"}),
-    awful.key({ modkey }, "s", function () awful.spawn(apps.gamelib) end,
+    awful.key({ modkey }, "s", function () awful.spawn.with_shell(apps.gamelib) end,
               {description = "open "..apps.gamelib, group="shortcuts"}),
     awful.key({ modkey }, "b", function () awful.spawn.raise_or_spawn(apps.browser) end,
               {description = "open "..apps.browser, group = "shortcuts"}),
     awful.key({ modkey, "Shift" }, "b", function () awful.spawn.raise_or_spawn(apps.browser2) end,
               {description = "open "..apps.browser2, group = "shortcuts"}),
-    awful.key({ modkey }, "r", function() awful.spawn(apps.terminal .." " .. apps.term_filebrowser) end,
+    awful.key({ modkey }, "e", function() awful.spawn(apps.terminal .." fish -c " .. apps.term_filebrowser) end,
               {description = "open " .. apps.term_filebrowser, group = "shortcuts"}),
     awful.key({ modkey }, "v", function() awful.spawn(apps.voicechat) end,
               {description = "open "..apps.voicechat, group = "shortcuts"}),

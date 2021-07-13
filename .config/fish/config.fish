@@ -293,8 +293,5 @@ for file in $__fish_config_dir/conf.d/*.fish $__fish_sysconf_dir/conf.d/*.fish $
     [ -f $file -a -r $file ]
     and source $file
 end
-
 # Starship prompt
-starship init fish | source
-# cd to dir on ranger exit
-bind \co ranger-cd
+# starship init fish | source

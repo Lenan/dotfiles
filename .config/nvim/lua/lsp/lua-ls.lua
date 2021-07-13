@@ -23,6 +23,5 @@ require'lspconfig'.sumneko_lua.setup {
                 maxPreload = 10000
             }
         }
-    },
-    default_config = {filetypes = {'lua'}, root_dir = [[root_pattern(".git") or bufdir]]}
+    }
 }

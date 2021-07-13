@@ -1,0 +1,232 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+background = ${xrdb:background:#1c1e26}
+foreground = ${xrdb:foreground:#eee}
+primary = ${xrdb:color4:#ffb52a}
+secondary = ${xrdb:color1:#e60053}
+alert = ${xrdb:color4:#bd2c40}
+
+[bar/main]
+monitor = ${env:MONITOR:DP-4}
+tray-position = ${env:TRAY_POSITION:right}
+tray-padding = 0
+tray-margin = 0
+tray-maxsize = 16
+tray-offset-x = 0
+tray-offset-y = 0
+tray-background = ${colors.primary}
+
+enable-ipc = true
+width = 100%
+height = 32
+radius = 0.0
+fixed-center = true
+;offset-x = 1
+;offset-y = 1%
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+
+border-size = 0
+; border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Arimo Nerd Font:pixelsize=13;3
+
+modules-left = layout sep  bspwm sep windowlist 
+modules-center = 
+modules-right =mpd sep pulseaudio sep cpu sep gpu sep memory sep time sep nvpn sep power-rofi 
+
+wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/layout]
+type= custom/script
+interval = 1
+exec=~/.config/polybar/scripts/bsp-layout.sh
+format-background = ${colors.primary}
+format-foreground = ${colors.background}
+format-padding = 1
+
+;Link to module: https://github.com/melangue/bspwm-window-titles
+[module/windowlist]
+type = custom/script
+interval = 0.1
+exec = ${env:P_BSPWM_WINDOW_CMD}
+
+; cycle between windows
+click-left = bspc node -f next.local
+click-right = bspc node -f prev.local
+
+format = <label>
+format-foreground = ${colors.foreground}
+format-underline = #00000000 
+format-overline = #00000000
+format-padding = 0
+
+[module/bspwm]
+type = internal/bspwm
+enable-scroll = false
+
+label-focused = %icon%
+label-focused-background = ${colors.background}
+label-focused-foreground = ${colors.primary}
+label-focused-overline= ${colors.primary}
+label-focused-padding-right = 1
+label-focused-padding-left= 1
+
+label-occupied = %icon%
+label-occupied-foreground = ${colors.primary}
+label-occupied-padding-right= 1
+label-occupied-padding-left= 1
+
+label-urgent = %icon%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding-right= 1
+label-urgent-padding-left= 1
+
+label-empty = %icon%
+label-empty-foreground = ${colors.foreground}
+label-empty-padding-right= 1
+label-empty-padding-left= 1
+
+ws-icon-0 = 1;爵
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-default = 爵
+
+; Separator in between workspaces
+; label-separator = |
+
+[module/mpd]
+type = internal/mpd
+format-online-prefix = "ﱘ "
+format-online-prefix-foreground = ${xrdb:color4:colors.foreground}
+format-online = <label-song>
+format-background= ${colors.background}
+
+label-song-maxlen = 40
+label-song-ellipsis = false
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+format-prefix = "﬙ "
+format-prefix-foreground = ${xrdb:color4:colors.foreground}
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 1
+format-prefix = " "
+format-prefix-foreground = ${xrdb:color4:colors.foreground}
+label = %mb_used%
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = %a %d %b
+
+format-prefix = " "
+format-prefix-foreground = ${xrdb:color4:colors.foreground}
+
+label = %date%
+
+[module/time]
+type = internal/date
+interval = 5
+
+time = %H:%M
+time-alt = %a %d %b
+
+format-prefix = " "
+format-prefix-foreground = ${xrdb:color4:colors.foreground}
+
+label = %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+label-volume = %percentage%%
+format-volume-prefix = "墳 "
+format-volume-prefix-foreground = ${xrdb:color4:colors.foreground}
+format-volume = <label-volume>
+click-right = pavucontrol
+
+[module/power-rofi]
+type=custom/text
+content = "襤" 
+content-foreground = ${colors.background}
+content-background = ${colors.primary}
+content-padding= 1
+click-left = rofi -show power-menu -modi "power-menu:~/.config/rofi/rofi-powermenu --choices=lockscreen/logout/reboot/shutdown" -theme "~/.config/rofi/launchers/colorful/style_2.rasi"
+
+[module/nvpn]
+type = custom/script
+exec = ~/.config/polybar/scripts/nvpn.sh 
+interval = 5
+click-left = ~/.config/polybar/scripts/nvpn.sh --toggle
+label-foreground = ${xrdb:color4:color.foreground}
+
+[module/gpu]
+type = custom/script
+exec = ~/.config/polybar/scripts/nvidia.sh
+format-prefix = "ﮞ "
+format-prefix-foreground = ${xrdb:color4:color.foreground}
+interval = 1
+
+[module/sep]
+type = custom/text
+content = " "
+content-background = ${colors.background}
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini

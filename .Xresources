@@ -1,2 +1,3 @@
-#include "/home/lenan/.config/xresources-colors/horizon"
 Xft.dpi: 96
+! #include "/home/lenan/.config/xresources-colors/horizon"
+#include "/home/lenan/.config/xresources-colors/onedarker"

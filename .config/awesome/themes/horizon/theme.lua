@@ -3,7 +3,7 @@ local dpi = require("beautiful.xresources").apply_dpi
 
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/rpg"
-theme.wallpaper = os.getenv("HOME") .. "/.config/awesome/wallpaper.jpg"
+theme.wallpaper = os.getenv("HOME") .. "/.config/awesome/wallpaper.png"
 theme.font = "Iosevka 12"
 theme.taglist_font = "Hack Nerd Font Mono 14"
 theme.icon_font = "Hack Nerd Font Mono 14"
